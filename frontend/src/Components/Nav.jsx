@@ -11,7 +11,7 @@ const Nav = () => {
 
 
   return (
-    <div className='flex justify-between gap-1 items-center'>
+    <div className='flex justify-between gap-1 items-center border-b pb-4'>
      <img src={assets.logo} alt="logo" className='w-36' />
      <div className='hidden md:flex gap-4'>
       <NavLink to={'/'} className='flex flex-col items-center justify-center gap-1 '>
