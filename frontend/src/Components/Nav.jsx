@@ -4,7 +4,10 @@ import { useState } from 'react';
 
 
 const Nav = () => {
-  const [visible, setVisible] = useState(false)
+  const [visible, setVisible] = useState(false);
+  const [dropdown, setDropdown] = useState(false);
+ 
+
 
 
   return (
@@ -13,19 +16,19 @@ const Nav = () => {
      <div className='hidden md:flex gap-4'>
       <NavLink to={'/'} className='flex flex-col items-center justify-center gap-1 '>
       <p>HOME</p>
-      <hr className='w-2/4 border-none h-[1.5px] bg-gray-700 '/>
+      <hr className='w-2/4 border-none h-[1.5px] bg-gray-700 hidden'/>
       </NavLink>
-      <NavLink to={'/collection'} className='flex flex-col items-center justify-center gap-1'>
+      <NavLink to={'/collections'} className='flex flex-col items-center justify-center gap-1'>
       <p>COLLECTIONS</p>
-      <hr className='w-2/4 border-none h-[1.5px] bg-gray-700'/>
+      <hr className='w-2/4 border-none h-[1.5px] bg-gray-700 hidden'/>
       </NavLink>
-      <NavLink to={'/about'} className='flex flex-col items-center justify-center gap-1'>
+      <NavLink to={'/about'} className='flex flex-col items-center justify-center  gap-1'>
       <p>ABOUT</p>
-      <hr className='w-2/4 border-none h-[1.5px] bg-gray-700'/>
+      <hr className='w-2/4 border-none h-[1.5px] bg-gray-700 hidden'/>
       </NavLink>
-      <NavLink to={'/contact'} className='flex flex-col items-center justify-center gap-1'>
+      <NavLink to={'/contact'} className='flex flex-col items-center justify-center  gap-1'>
       <p>CONTACTS</p>
-      <hr className='w-2/4 border-none h-[1.5px] bg-gray-700'/>
+      <hr className='w-2/4 border-none h-[1.5px] bg-gray-700 hidden'/>
       </NavLink>
      </div>
      {/* last group */}
@@ -33,8 +36,18 @@ const Nav = () => {
       <div className='w-[1.25rem] cursor-pointer'>
         <img src={assets.search_icon} alt="" />
       </div >
-      <div className='w-[1.25rem] cursor-pointer'>
+      <div onClick={()=> setDropdown(!dropdown)} className='w-[1.25rem] cursor-pointer '>
+        <div  className='relative'>
         <img src={assets.profile_icon} alt="" />
+        {
+          dropdown && <ul className='flex flex-col gap-3 bg-slate-100 px-6 py-3 rounded-lg absolute top-6 -right-20 shadow-md'>
+          <NavLink to={'/profile'}>Profile</NavLink>
+          <NavLink to={'/profile'}>Orders</NavLink>
+          <button>Logout</button>
+        </ul>
+        }
+        </div>
+        
       </div>
       <div className='w-[1.25rem] cursor-pointer'>
         <img src={assets.cart_icon} alt="" />
@@ -62,6 +75,7 @@ const Nav = () => {
       </ul>
       </div> : null
      }
+
     </div>
   );
 };

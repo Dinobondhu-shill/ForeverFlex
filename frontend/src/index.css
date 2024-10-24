@@ -7,3 +7,6 @@
 *{
   font-family: "Outfit", serif;
 }
+a.active hr{
+  display: block;
+}
