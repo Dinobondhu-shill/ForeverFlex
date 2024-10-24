@@ -49,8 +49,9 @@ const Nav = () => {
         </div>
         
       </div>
-      <div className='w-[1.25rem] cursor-pointer'>
+      <div className='w-[1.25rem] cursor-pointer relative'>
         <img src={assets.cart_icon} alt="" />
+        <span className='w-4 h-4 border rounded-full absolute -top-3 -right-2 flex justify-center items-center bg-black text-white text-sm'>2 </span>
       </div>
      </div>
      <div onClick={()=> setVisible(true)} className='md:hidden w-[1.25rem]'>
