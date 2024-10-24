@@ -1,5 +1,6 @@
 import React from 'react';
 import { assets } from '../../../public/assets/frontend_assets/assets';
+import Subscribe from '../../Components/Subscribe';
 
 const Contact = () => {
   return (
@@ -20,8 +21,8 @@ const Contact = () => {
             <p>Learn more about our teams and job openings.</p>
             <button className='px-8 py-4 border border-black w-fit my-3'>Explore Jobs</button>
           </div>
-          
         </div>
+        <Subscribe />
     </div>
   );
 };
