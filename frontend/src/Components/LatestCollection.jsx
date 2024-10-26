@@ -1,13 +1,18 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import Title from './Title';
+import { ProductContext } from '../Context/ProductContext';
+import ProductItem from './ProductItem';
 
 const LatestCollection = () => {
+  const {products} = useContext(ProductContext);
+  console.log(products)
   return (
     <div className='py-4 md:py-6'>
-      <div className='flex items-center gap-2 justify-center '>
-        <p className='font-medium text-4xl text-gray-700 '><span className='text-gray-500'>LATEST</span> COLLECTIONS</p>
-        <hr className='w-14 h-[2.5px] bg-black '/>
-        </div>
-        <p className='text-center font-normal text-[16px] py-3'>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi cum, molestias sit minima ab sed.</p>
+     <Title text1={'LATEST'} text2={'COLLECTIONS'} />
+      <p className='text-center  text-[16px] py-3'>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi cum, molestias sit minima ab sed.</p>
+      <div>
+        <ProductItem />
+      </div>
     </div>
   );
 };

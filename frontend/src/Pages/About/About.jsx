@@ -1,13 +1,11 @@
 import React from 'react';
 import { assets } from '../../../public/assets/frontend_assets/assets';
+import Title from '../../Components/Title';
 
 const About = () => {
   return (
     <div className='my-8'>
-      <div className='flex items-center gap-2 justify-center '>
-        <p className='font-medium text-3xl text-gray-700 '><span className='text-gray-500'>ABOUT</span> US</p>
-        <hr className='w-14 h-[2.5px] bg-black '/>
-        </div>
+<Title text1={"ABOUT"} text2={"US"}/>
         <div className='flex flex-col md:flex-row justify-center items-center my-5 gap-10'>
           <img src={assets.about_img} alt="" className='w-1/3 rounded-sm'/>
           <div className='w-2/3 flex flex-col justify-center text-gray-500  text-[18px]'>
