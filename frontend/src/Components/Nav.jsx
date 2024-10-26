@@ -59,16 +59,17 @@ const Nav = () => {
      </div>
      {
       visible ? <div className='w-full h-full bg-white absolute top-0 right-0'> 
-      <div onClick={()=>setVisible(false)}>
-        <img src={assets.cross_icon} className='py-3 px-3' />
+      <div onClick={()=>setVisible(false)} className='flex items-center'>
+        <img src={assets.dropdown_icon} className='py-3 px-3 w-12 h-12 rotate-180 object-cover'  /> 
+        <button className='btn'>Back</button>
       </div>
-      <ul className='flex flex-col gap-5 text-xl justify-center w-full items-center '>
+      <ul className='flex flex-col text-xl gap-2 justify-center w-full items-center '>
         <NavLink onClick={()=>setVisible(false)} to={'/'} className='w-full text-center'>HOME
         <hr className='w-full border-none h-[1.5px] bg-gray-700 '/></NavLink>
         <NavLink onClick={()=>setVisible(false)} className='w-full text-center' to={'/collections'}>COLLECTIONS
         <hr className='w-full border-none h-[1.5px] bg-gray-700 '/>
         </NavLink>
-        <NavLink onClick={()=>setVisible(false)} className='w-full text-center' to={'/about'}>ABOUT
+        <NavLink onClick={()=>setVisible(false)} className='w-full h-full text-center' to={'/about'}>ABOUT
         <hr className='w-full border-none h-[1.5px] bg-gray-700 '/>
         </NavLink>
         <NavLink onClick={()=>setVisible(false)} className='w-full text-center' to={'/contact'}>CONTACTS
