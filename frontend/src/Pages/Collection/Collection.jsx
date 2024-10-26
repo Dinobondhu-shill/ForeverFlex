@@ -2,12 +2,14 @@ import React, { useContext, useEffect, useState } from 'react';
 import Title from '../../Components/Title';
 import { ProductContext } from '../../Context/ProductContext';
 import ProductItem from '../../Components/ProductItem';
+import { assets } from '../../../public/assets/frontend_assets/assets';
 
 const Collection = () => {
   const {products} = useContext(ProductContext);
   const [filterProducts, setFilterProducts] = useState([]);
   const [category, setCategory] = useState([]);
   const [subCategory, setSubCategory] = useState([]);
+  const [showFilter, setShowFilter] = useState(false)
 
   const toggleCategory = (e)=>{
     if(category.includes(e.target.value)){
@@ -26,9 +28,10 @@ const Collection = () => {
       setSubCategory(prev => [...prev, e.target.value])
     }
   }
-// useEffect(()=>{
-//   setFilterProducts(products)
-// },[products])
+
+  const handleShowFilter = ()=>{
+    setShowFilter(!showFilter)
+  }
 
 const applyFilter=()=>{
   let productscopy = products.slice();
@@ -46,10 +49,15 @@ useEffect(()=>{
 })
 
   return (
-    <div className='my-5 md:my-10 flex gap-10'>
+    <div className='my-5 md:my-10 md:flex gap-10'>
      {/* Filter section */}
-     <div className='max-w-56 flex flex-col gap-5'>
-      <h3 className='text-2xl'>FILTERS</h3>
+     
+     <div className='max-w-56 my-4'>
+     <h3 onClick={handleShowFilter} className='text-2xl mb-10 pt-2 flex items-center gap-2'>FILTERS
+      <img src={assets.dropdown_icon} className={`h-4 md:hidden ${showFilter? 'rotate-90': ''}`} />
+     </h3>
+     
+      <div className={`md:flex flex-col gap-5 space-y-3 md:space-y-0 ${showFilter ? "": "hidden"}`}>
       <div className='border py-1 pl-3 pr-24'>
       <p className='text-xl py-2'>Category</p>
       <div className='flex flex-col gap-2 text-[15px]'>
@@ -85,10 +93,11 @@ useEffect(()=>{
       </div>
       </div>
       </div>
+      </div>
      </div>
      {/* products sections */}
      <div  className='flex-1'>
-      <div className='flex justify-between items-center'>
+      <div className='flex md:flex-row gap-4 md:gap-0  flex-col-reverse justify-between md:items-center'>
         <Title text1={"ALL"} text2={"COLLECTIONS"} />
         <div>
           <select className='p-4 border text-gray-700 outline-none text-[15px]'>
