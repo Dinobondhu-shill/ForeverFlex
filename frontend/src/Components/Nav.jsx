@@ -1,14 +1,17 @@
 import { NavLink } from 'react-router-dom';
 import { assets } from '../../public/assets/frontend_assets/assets'
-import { useState } from 'react';
+import { useContext, useState } from 'react';
+import { ProductContext } from '../Context/ProductContext';
 
 
 const Nav = () => {
   const [visible, setVisible] = useState(false);
   const [dropdown, setDropdown] = useState(false);
- 
+ const {showSearch, setShowSearch} = useContext(ProductContext);
 
-
+const handleShowSearch =()=>{
+  setShowSearch(!showSearch)
+}
 
   return (
     <div className='flex justify-between gap-1 items-center border-b pb-4'>
@@ -33,7 +36,7 @@ const Nav = () => {
      </div>
      {/* last group */}
      <div className='flex gap-6 items-center'>
-      <div className='w-[1.25rem] cursor-pointer'>
+      <div onClick={handleShowSearch} className='w-[1.25rem] cursor-pointer'>
         <img src={assets.search_icon} alt="" />
       </div >
       <div onClick={()=> setDropdown(!dropdown)} className='w-[1.25rem] cursor-pointer '>

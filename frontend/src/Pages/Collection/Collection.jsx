@@ -5,12 +5,14 @@ import ProductItem from '../../Components/ProductItem';
 import { assets } from '../../../public/assets/frontend_assets/assets';
 
 const Collection = () => {
-  const {products} = useContext(ProductContext);
+  const {products, showSearch, setShowSearch} = useContext(ProductContext);
   const [filterProducts, setFilterProducts] = useState([]);
   const [category, setCategory] = useState([]);
   const [subCategory, setSubCategory] = useState([]);
   const [showFilter, setShowFilter] = useState(false)
   const [sortType, setSortType] = useState("Relevent")
+
+
 
   const toggleCategory = (e)=>{
     if(category.includes(e.target.value)){
@@ -68,8 +70,21 @@ useEffect(()=>{
   sortProduct();
 }, [sortType])
 
+const handleShowSearch =()=>{
+  setShowSearch(!showSearch)
+}
+
   return (
-    <div className='my-5 md:my-10 md:flex gap-10'>
+    <div>
+      {showSearch ? <div className='h-20 flex justify-center gap-4 items-center border-b-2 bg-[#edeaea32]'>
+        <div className=' flex justify-between bg-transparent w-2/4  border border-gray-500 py-2 px-4 rounded-full'>
+        <input type="text" placeholder='Search' className='w-4/5 outline-none bg-transparent' />
+        <img className='h-5 cursor-pointer' src={assets.search_icon}  />
+        </div>
+        <img onClick={handleShowSearch} src={assets.cross_icon} className='cursor-pointer' />
+      </div> : null}
+      {/* others content  */}
+      <div className='my-5 md:my-10 md:flex gap-10'>
      {/* Filter section */}
      
      <div className='max-w-56 my-4'>
@@ -136,6 +151,7 @@ useEffect(()=>{
     }
       </div>
      </div>
+    </div>
     </div>
   );
 };

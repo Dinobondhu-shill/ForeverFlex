@@ -5,6 +5,7 @@ import Collection from "./Pages/Collection/Collection";
 import About from "./Pages/About/About";
 import Contact from "./Pages/Contact/Contact";
 import Login from "./Pages/Register/Login";
+import SignUp from "./Pages/Register/SignUp";
 
    export const router = createBrowserRouter([
       {
@@ -30,6 +31,10 @@ import Login from "./Pages/Register/Login";
           {
             path:'/login',
             element: <Login />
+          },
+          {
+            path: '/register',
+            element: <SignUp />
           }
         ]
       },
