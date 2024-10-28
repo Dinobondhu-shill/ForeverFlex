@@ -35,7 +35,7 @@ import SignUp from "./Pages/Register/SignUp";
           {
             path: '/register',
             element: <SignUp />
-          }
+          },
         ]
       },
     ]);

@@ -33,6 +33,10 @@ const handleShowSearch =()=>{
       <p>CONTACTS</p>
       <hr className='w-2/4 border-none h-[1.5px] bg-gray-700 hidden'/>
       </NavLink>
+      <NavLink to={'/login'} className='flex flex-col items-center justify-center  gap-1'>
+      <p>Login</p>
+      <hr className='w-2/4 border-none h-[1.5px] bg-gray-700 hidden'/>
+      </NavLink>
      </div>
      {/* last group */}
      <div className='flex gap-6 items-center'>

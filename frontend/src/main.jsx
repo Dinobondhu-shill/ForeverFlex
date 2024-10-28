@@ -4,11 +4,14 @@ import './index.css'
 import { router } from './App.jsx'
 import { RouterProvider} from "react-router-dom";
 import ProductProvider from './Context/ProductContext.jsx';
+import FirebaseProvider from './Context/FirebaseProvider.jsx';
 
 createRoot(document.getElementById('root')).render(
-  <StrictMode>
+<StrictMode>
+  <FirebaseProvider>
     <ProductProvider>
-    <RouterProvider router={router} />
+      <RouterProvider router={router} />
     </ProductProvider>
-  </StrictMode>,
+  </FirebaseProvider>
+</StrictMode>,
 )

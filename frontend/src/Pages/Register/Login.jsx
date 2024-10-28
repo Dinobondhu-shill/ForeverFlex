@@ -16,7 +16,7 @@ const Login = () => {
           <Link className='border-b border-black' to={'/register'}>Create Account</Link>
         </div>
         <div className='flex justify-center my-10'>
-        <button className='border bg-black px-10 py-2 text-white text-[14px]' type='submit'>Sign Up</button>
+        <button className='border bg-black px-10 py-2 text-white text-[14px]' type='submit'>Log in</button>
         </div>
       </form>
     </div>
