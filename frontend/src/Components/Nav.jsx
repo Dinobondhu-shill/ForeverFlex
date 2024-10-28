@@ -1,13 +1,15 @@
-import { NavLink } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import { assets } from '../../public/assets/frontend_assets/assets'
 import { useContext, useState } from 'react';
 import { ProductContext } from '../Context/ProductContext';
+import { AuthContext } from '../Context/FirebaseProvider';
 
 
 const Nav = () => {
   const [visible, setVisible] = useState(false);
   const [dropdown, setDropdown] = useState(false);
  const {showSearch, setShowSearch} = useContext(ProductContext);
+ const {user, logOut} = useContext(AuthContext);
 
 const handleShowSearch =()=>{
   setShowSearch(!showSearch)
@@ -43,19 +45,21 @@ const handleShowSearch =()=>{
       <div onClick={handleShowSearch} className='w-[1.25rem] cursor-pointer'>
         <img src={assets.search_icon} alt="" />
       </div >
-      <div onClick={()=> setDropdown(!dropdown)} className='w-[1.25rem] cursor-pointer '>
+      {
+        user ? <div onClick={()=> setDropdown(!dropdown)} className='w-[1.25rem] cursor-pointer '>
         <div  className='relative'>
         <img src={assets.profile_icon} alt="" />
         {
           dropdown && <ul className='flex flex-col gap-3 bg-slate-100 px-6 py-3 rounded-lg absolute top-6 -right-20 shadow-md'>
           <NavLink to={'/profile'}>Profile</NavLink>
           <NavLink to={'/profile'}>Orders</NavLink>
-          <button>Logout</button>
+          <button onClick={()=> logOut()}>Logout</button>
         </ul>
         }
         </div>
         
-      </div>
+      </div> : <Link className='w-[1.25rem] cursor-pointer' to={'/login'}> <img src={assets.profile_icon} alt="" /></Link>
+      }
       <div className='w-[1.25rem] cursor-pointer relative'>
         <img src={assets.cart_icon} alt="" />
         <span className='w-4 h-4 border rounded-full absolute -top-3 -right-2 flex justify-center items-center bg-black text-white text-sm'>2 </span>

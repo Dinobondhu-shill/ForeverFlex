@@ -1,19 +1,22 @@
 import React, { useContext } from 'react';
 import Title from '../../Components/Title';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../Context/FirebaseProvider';
 
 const SignUp = () => {
-  const {createUser} = useContext(AuthContext);
+  const {createUser, updateUserProfile} = useContext(AuthContext);
+  const navigate = useNavigate()
 
   const handleSignUp =async(e) =>{
     e.preventDefault();
     const form = e.target
     const fullName = form.name.value;
     const email = form.email.value;
-    const Number = form.phone.value;
+    const number = form.phone.value;
     const password = form.password.value;
     await createUser(email, password)
+  await updateUserProfile(fullName, number)
+  navigate('/')
   }
 
   return (
