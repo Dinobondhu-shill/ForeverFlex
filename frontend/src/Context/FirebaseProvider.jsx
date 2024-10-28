@@ -15,7 +15,6 @@ const FirebaseProvider = ({children}) =>{
 
 const createUser = (email, password)=>{
   setLoading(true);
-  alert('Created User Successfully')
   return createUserWithEmailAndPassword(auth, email, password)
 }
 // update user
@@ -27,6 +26,7 @@ const updateUserProfile =(fullName, number)=>{
 }
 const login = (email, password)=>{
   setLoading(true);
+  alert('Login User Successfully')
   return signInWithEmailAndPassword(auth, email, password)
 }
 const googleLogin =()=>{
