@@ -24,7 +24,8 @@ useEffect(()=>{
 },[product])
 
   return (
-    <div className='flex flex-col md:flex-row gap-10 my-5 md:my-10 w-full'>
+    <div>
+      <div className='flex flex-col md:flex-row gap-10 my-5 md:my-10 w-full'>
       <div className='flex flex-col-reverse md:flex-row gap-6 w-full md:w-1/2'>
         <div className='flex flex-row md:flex-col gap-3 w-1/5'>
           {
@@ -60,6 +61,28 @@ useEffect(()=>{
             Easy return and exchange policy within 7 days.</p>
           </div>
       </div>
+    </div>
+    {/* Tabs data */}
+    <div role="tablist" className="tabs tabs-lifted my-10">
+  <input type="radio" name="my_tabs_2" role="tab" className="tab" aria-label="Descriptions" />
+  <div role="tabpanel" className="tab-content text-[14px] border-base-300 text-gray-500 rounded-box p-6">
+  An e-commerce website is an online platform that facilitates the buying and selling of products or services over the internet. It serves as a virtual marketplace where businesses and individuals can showcase their products, interact with customers, and conduct transactions without the need for a physical presence. E-commerce websites have gained immense popularity due to their convenience, accessibility, and the global reach they offer. <br />
+  <br />
+
+E-commerce websites typically display products or services along with detailed descriptions, images, prices, and any available variations (e.g., sizes, colors). Each product usually has its own dedicated page with relevant information.
+  </div>
+
+  <input
+    type="radio"
+    name="my_tabs_2"
+    role="tab"
+    className="tab"
+    aria-label="Reviews"
+    defaultChecked />
+  <div role="tabpanel" className="tab-content bg-base-100 border-base-300 rounded-box p-6">
+    Reviews goes here
+  </div>
+</div>
     </div>
   );
 };
