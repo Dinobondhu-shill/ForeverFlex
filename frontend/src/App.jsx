@@ -6,6 +6,7 @@ import About from "./Pages/About/About";
 import Contact from "./Pages/Contact/Contact";
 import Login from "./Pages/Register/Login";
 import SignUp from "./Pages/Register/SignUp";
+import ProductDetails from "./Pages/Collection/ProductDetails";
 
    export const router = createBrowserRouter([
       {
@@ -19,6 +20,10 @@ import SignUp from "./Pages/Register/SignUp";
           {
             path: '/collections',
             element: <Collection />
+          },
+          {
+            path:'/product/:productId',
+            element:<ProductDetails />
           },
           {
             path: '/about',

@@ -3,6 +3,7 @@ import Title from '../../Components/Title';
 import { ProductContext } from '../../Context/ProductContext';
 import ProductItem from '../../Components/ProductItem';
 import { assets } from '../../../public/assets/frontend_assets/assets';
+import { Link } from 'react-router-dom';
 
 const Collection = () => {
   const {products, showSearch, setShowSearch} = useContext(ProductContext);
@@ -146,7 +147,8 @@ const handleShowSearch =()=>{
       <div className='my-5 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4'>
     {
       filterProducts?.map((item, index)=>(
-        <ProductItem key={index} item={item}/>
+        <Link key={index} to={`/collection/${item._id}`}>
+        <ProductItem item={item}/></Link>
       ))
     }
       </div>
