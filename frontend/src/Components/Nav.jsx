@@ -8,8 +8,9 @@ import { AuthContext } from '../Context/FirebaseProvider';
 const Nav = () => {
   const [visible, setVisible] = useState(false);
   const [dropdown, setDropdown] = useState(false);
- const {showSearch, setShowSearch} = useContext(ProductContext);
+ const {showSearch, setShowSearch, cartCount} = useContext(ProductContext);
  const {user, logOut} = useContext(AuthContext);
+const totalCount = cartCount();
 
 const handleShowSearch =()=>{
   setShowSearch(!showSearch)
@@ -62,7 +63,7 @@ const handleShowSearch =()=>{
       }
       <div className='w-[1.25rem] cursor-pointer relative'>
         <img src={assets.cart_icon} alt="" />
-        <span className='w-4 h-4 border rounded-full absolute -top-3 -right-2 flex justify-center items-center bg-black text-white text-sm'>2 </span>
+        <span className='w-4 h-4 border rounded-full absolute -top-3 -right-2 flex justify-center items-center bg-black text-white text-sm'>{totalCount}</span>
       </div>
      </div>
      <div onClick={()=> setVisible(true)} className='md:hidden w-[1.25rem]'>

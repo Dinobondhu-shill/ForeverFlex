@@ -8,8 +8,8 @@ const delivery_fee = 10;
 
 
 const ProductProvider = ({children})=>{
-  const [cart, setCart] = useState({});
-  console.log(cart)
+  const [cart, setCart] = useState({});  
+  const [showSearch, setShowSearch] = useState(false)
 
   const handleAddToCart = async (productId, size) =>{
     if(!size){
@@ -31,8 +31,20 @@ const ProductProvider = ({children})=>{
   }
   setCart(cartProduct)
   }
+
+  const cartCount = () => {
+    let totalCount = 0;
   
-const [showSearch, setShowSearch] = useState(false)
+    for (const productId in cart) {
+      for (const size in cart[productId]) {
+        if (cart[productId][size] > 0) {
+          totalCount += cart[productId][size];
+        }
+      }
+    }
+  
+    return totalCount;
+  };
   
   const values={
 products, 
@@ -41,6 +53,7 @@ delivery_fee,
 setShowSearch,
 showSearch,
 handleAddToCart,
+cartCount
   }
   return (
     <ProductContext.Provider value={values}>
