@@ -5,7 +5,7 @@ import { assets } from "../../../public/assets/frontend_assets/assets";
 
 
 const Cart = () => {
-const {products, cart, currency, updateQuantity} = useContext(ProductContext);
+const {products, cart, currency, updateQuantity, delivery_fee} = useContext(ProductContext);
 const [cartItems, setCartItems] = useState([]);
 const [subtotal, setSubtotal] = useState(null)
 
@@ -78,12 +78,20 @@ return (
     }
   </div>
   {/* checkout field */}
-  <div className="flex flex-col-reverse md:ml-36 lg:ml-72 mt-20 mb-20">
-    <Title text1={"CART"} text2={"TOTAL"} />
-    <div>
-      <div className="flex justify-between">
+  <div className="flex flex-col items-end text-start mb-28">
+    <div className="mr-56 my-10 text-xl"><Title text1={"CART"} text2={"TOTAL"} /></div>
+    <div className="space-y-1 md:w-2/5">
+      <div className="flex justify-between border-b py-1">
         <p>Subtotal</p>
-        <p>{subtotal}</p>
+        <p>{currency}{subtotal}.00</p>
+      </div>
+      <div className="flex justify-between border-b py-1">
+        <p>Delivery Fee</p>
+        <p>{currency}{delivery_fee}.00</p>
+      </div>
+      <div className="flex justify-between font-bold">
+        <p>Total</p>
+        <p>{currency}{delivery_fee+subtotal}.00</p>
       </div>
     </div>
   </div>
