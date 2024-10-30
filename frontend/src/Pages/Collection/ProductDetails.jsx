@@ -51,7 +51,7 @@ useEffect(()=>{
             <h3 className='text-[18px]'>Select Size</h3>
           <div className='flex gap-3 my-4'>
             {
-              product?.sizes?.map((item, index)=> <p onClick={()=>setSize(item)} key={index} className={`px-4 py-2 border-[1px] border-gray-400 bg-gray-200 cursor-pointer ${size===item? 'border-red-300 border-[1.8px] bg-transparent': null }`}>{item}</p>)
+              product?.sizes?.map((item, index)=> <p onClick={()=>setSize(item)} key={index} className={`px-4 py-2 border-[1px] bg-gray-200 cursor-pointer ${size===item? 'border-red-300 border-[1.8px] bg-transparent': null }`}>{item}</p>)
             }
           </div>
           </div>
