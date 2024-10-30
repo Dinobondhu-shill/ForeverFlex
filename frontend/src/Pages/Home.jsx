@@ -6,15 +6,15 @@ import Policy from '../Components/Policy';
 import Subscribe from '../Components/Subscribe';
 
 const Home = () => {
-  return (
-    <div>
-     <Banner />
-     <LatestCollection />
-     <BestSeller />
-     <Policy />
-     <Subscribe />
-    </div>
-  );
+return (
+<div>
+  <Banner />
+  <LatestCollection />
+  <BestSeller />
+  <Policy />
+  <Subscribe />
+</div>
+);
 };
 
 export default Home;

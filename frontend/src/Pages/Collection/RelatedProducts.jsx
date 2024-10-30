@@ -6,7 +6,7 @@ const RelatedProducts = ({category}) => {
  const {products} = useContext(ProductContext)
  const [product, setProduct] = useState([]);
 const fetchRelatedProduct = async ()=>{
-  const relatedProducts = products.filter(item => item.category === category).slice(0,5);
+  const relatedProducts = products.filter(item => item.category === category).slice(1,6);
   if(relatedProducts){
    setProduct(relatedProducts)
   }
