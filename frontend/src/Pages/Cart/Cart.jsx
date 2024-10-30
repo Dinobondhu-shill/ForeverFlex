@@ -5,7 +5,7 @@ import { assets } from "../../../public/assets/frontend_assets/assets";
 
 
 const Cart = () => {
-  const {products, cart, currency} = useContext(ProductContext);
+  const {products, cart, currency, updateQuantity} = useContext(ProductContext);
   const [cartItems, setCartItems] = useState([])
 
   useEffect(()=>{
@@ -47,7 +47,7 @@ const Cart = () => {
                   </div>
                 </div>
                 <input className="outline-none border w-16 text-center py-2" type="number"  defaultValue={item.quantity} />
-                <img className="w-7 h-7 object-cover mr-10 cursor-pointer" src={assets.bin_icon} alt="" />
+                <img onClick={()=>updateQuantity(item._id, item.size, 0)} className="w-7 h-7 object-cover mr-10 cursor-pointer" src={assets.bin_icon} alt="" />
               </div>
             )
           }
@@ -55,8 +55,14 @@ const Cart = () => {
         }
       </div>
       {/* checkout field */}
-      <div>
-
+      <div className="flex flex-col-reverse md:ml-36 lg:ml-72 mt-20 mb-20">
+         <Title text1={"CART"} text2={"TOTAL"}/>
+         <div>
+          <div className="flex justify-between">
+          <p>Subtotal</p>
+          
+          </div>
+         </div>
       </div>
     </div>
   );

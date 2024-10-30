@@ -46,6 +46,11 @@ const ProductProvider = ({children})=>{
     return totalCount;
   };
   
+  const updateQuantity = (itemId, size, quantity)=>{
+    let CartData = structuredClone(cart);
+    CartData[itemId][size] = quantity;
+    setCart(CartData)
+  }
   const values={
 products, 
 currency,
@@ -54,7 +59,7 @@ setShowSearch,
 showSearch,
 handleAddToCart,
 cartCount,
-cart
+cart, updateQuantity
   }
   return (
     <ProductContext.Provider value={values}>
