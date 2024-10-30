@@ -6,7 +6,8 @@ import { assets } from "../../../public/assets/frontend_assets/assets";
 
 const Cart = () => {
 const {products, cart, currency, updateQuantity} = useContext(ProductContext);
-const [cartItems, setCartItems] = useState([])
+const [cartItems, setCartItems] = useState([]);
+const [subtotal, setSubtotal] = useState(null)
 
 useEffect(()=>{
 const tempData = [];
@@ -24,6 +25,23 @@ quantity:cart[items][item]
 setCartItems(tempData)
 },[cart]);
 
+const calculateSubtotal = () => {
+  let subtotal = 0;
+
+  cartItems?.forEach((item) => {
+    const productData = products.find((product) => product._id === item._id);
+
+    if (productData) {
+      subtotal += productData.price * item.quantity;
+    }
+  });
+
+setSubtotal(subtotal)
+};
+
+useEffect(()=>{
+  calculateSubtotal()
+},[cartItems])
 
 return (
 <div>
@@ -65,7 +83,7 @@ return (
     <div>
       <div className="flex justify-between">
         <p>Subtotal</p>
-
+        <p>{subtotal}</p>
       </div>
     </div>
   </div>
