@@ -61,10 +61,10 @@ const handleShowSearch =()=>{
         
       </div> : <Link className='w-[1.25rem] cursor-pointer' to={'/login'}> <img src={assets.profile_icon} alt="" /></Link>
       }
-      <div className='w-[1.25rem] cursor-pointer relative'>
+      <Link to={'/cart'} className='w-[1.25rem] cursor-pointer relative'>
         <img src={assets.cart_icon} alt="" />
         <span className='w-4 h-4 border rounded-full absolute -top-3 -right-2 flex justify-center items-center bg-black text-white text-sm'>{totalCount}</span>
-      </div>
+      </Link>
      </div>
      <div onClick={()=> setVisible(true)} className='md:hidden w-[1.25rem]'>
      <img src={assets.menu_icon} />

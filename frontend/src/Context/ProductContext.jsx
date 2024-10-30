@@ -53,7 +53,8 @@ delivery_fee,
 setShowSearch,
 showSearch,
 handleAddToCart,
-cartCount
+cartCount,
+cart
   }
   return (
     <ProductContext.Provider value={values}>

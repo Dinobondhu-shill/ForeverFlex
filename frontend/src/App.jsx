@@ -7,6 +7,7 @@ import Contact from "./Pages/Contact/Contact";
 import Login from "./Pages/Register/Login";
 import SignUp from "./Pages/Register/SignUp";
 import ProductDetails from "./Pages/Collection/ProductDetails";
+import Cart from "./Pages/Cart/Cart";
 
    export const router = createBrowserRouter([
       {
@@ -41,6 +42,10 @@ import ProductDetails from "./Pages/Collection/ProductDetails";
             path: '/register',
             element: <SignUp />
           },
+          {
+            path:'/cart',
+            element: <Cart />
+          }
         ]
       },
     ]);
