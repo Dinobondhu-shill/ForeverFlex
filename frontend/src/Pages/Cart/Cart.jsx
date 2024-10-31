@@ -5,9 +5,9 @@ import { assets } from "../../../public/assets/frontend_assets/assets";
 
 
 const Cart = () => {
-const {products, cart, currency, updateQuantity, delivery_fee} = useContext(ProductContext);
+const {products, cart, currency, updateQuantity, delivery_fee,calculateSubtotal} = useContext(ProductContext);
 const [cartItems, setCartItems] = useState([]);
-const [subtotal, setSubtotal] = useState(null)
+// const [subtotal, setSubtotal] = useState(null)
 
 useEffect(()=>{
 const tempData = [];
@@ -25,23 +25,11 @@ quantity:cart[items][item]
 setCartItems(tempData)
 },[cart]);
 
-const calculateSubtotal = () => {
-  let subtotal = 0;
 
-  cartItems?.forEach((item) => {
-    const productData = products.find((product) => product._id === item._id);
 
-    if (productData) {
-      subtotal += productData.price * item.quantity;
-    }
-  });
-
-setSubtotal(subtotal)
-};
-
-useEffect(()=>{
-  calculateSubtotal()
-},[cartItems])
+// useEffect(()=>{
+//   calculateSubtotal()
+// },[cartItems])
 
 return (
 <div>
@@ -81,17 +69,20 @@ return (
   <div className="flex flex-col items-end text-start mb-28">
     <div className="mr-56 my-10 text-xl"><Title text1={"CART"} text2={"TOTAL"} /></div>
     <div className="space-y-1 md:w-2/5">
-      <div className="flex justify-between border-b py-1">
+      <div className="flex justify-between border-b border-black py-1">
         <p>Subtotal</p>
-        <p>{currency}{subtotal}.00</p>
+        <p>{currency}{calculateSubtotal(cartItems)}.00</p>
       </div>
-      <div className="flex justify-between border-b py-1">
+      <div className="flex justify-between border-b-2 border-black py-1">
         <p>Delivery Fee</p>
         <p>{currency}{delivery_fee}.00</p>
       </div>
       <div className="flex justify-between font-bold">
         <p>Total</p>
-        <p>{currency}{delivery_fee+subtotal}.00</p>
+        <p>{calculateSubtotal(cartItems)+delivery_fee}.00</p>
+      </div>
+      <div className="flex justify-end">
+      <button className="border bg-black text-white py-3 px-8 my-5">Proceed to Checkout</button>
       </div>
     </div>
   </div>

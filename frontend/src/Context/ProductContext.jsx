@@ -51,6 +51,20 @@ const ProductProvider = ({children})=>{
     CartData[itemId][size] = quantity;
     setCart(CartData)
   }
+  const calculateSubtotal = (cartItems) => {
+    let subtotal = 0;
+  
+    cartItems?.forEach((item) => {
+      const productData = products.find((product) => product._id === item._id);
+  
+      if (productData) {
+        subtotal += productData.price * item.quantity;
+      }
+    });
+  
+ return subtotal
+  };
+
   const values={
 products, 
 currency,
@@ -59,7 +73,7 @@ setShowSearch,
 showSearch,
 handleAddToCart,
 cartCount,
-cart, updateQuantity
+cart, updateQuantity, calculateSubtotal
   }
   return (
     <ProductContext.Provider value={values}>
