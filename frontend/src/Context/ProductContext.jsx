@@ -74,7 +74,7 @@ setShowSearch,
 showSearch,
 handleAddToCart,
 cartCount,
-cart, updateQuantity, calculateSubtotal
+cart, updateQuantity, calculateSubtotal, total
   }
   return (
     <ProductContext.Provider value={values}>
