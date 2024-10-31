@@ -9,7 +9,8 @@ const delivery_fee = 10;
 
 const ProductProvider = ({children})=>{
   const [cart, setCart] = useState({});  
-  const [showSearch, setShowSearch] = useState(false)
+  const [showSearch, setShowSearch] = useState(false);
+  const [total, setTotal] = useState(null)
 
   const handleAddToCart = async (productId, size) =>{
     if(!size){
@@ -61,7 +62,7 @@ const ProductProvider = ({children})=>{
         subtotal += productData.price * item.quantity;
       }
     });
-  
+  setTotal(subtotal)
  return subtotal
   };
 

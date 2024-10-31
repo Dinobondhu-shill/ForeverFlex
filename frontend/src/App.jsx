@@ -8,6 +8,7 @@ import Login from "./Pages/Register/Login";
 import SignUp from "./Pages/Register/SignUp";
 import ProductDetails from "./Pages/Collection/ProductDetails";
 import Cart from "./Pages/Cart/Cart";
+import PlaceOrder from "./Pages/Order/PlaceOrder";
 
    export const router = createBrowserRouter([
       {
@@ -45,6 +46,10 @@ import Cart from "./Pages/Cart/Cart";
           {
             path:'/cart',
             element: <Cart />
+          },
+          {
+            path:'/place-order',
+            element: <PlaceOrder />
           }
         ]
       },

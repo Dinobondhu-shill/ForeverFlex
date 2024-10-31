@@ -2,13 +2,12 @@ import { useContext, useEffect, useState } from "react";
 import { ProductContext } from "../../Context/ProductContext";
 import Title from "../../Components/Title";
 import { assets } from "../../../public/assets/frontend_assets/assets";
+import { Link} from "react-router-dom";
 
 
 const Cart = () => {
 const {products, cart, currency, updateQuantity, delivery_fee,calculateSubtotal} = useContext(ProductContext);
 const [cartItems, setCartItems] = useState([]);
-// const [subtotal, setSubtotal] = useState(null)
-
 useEffect(()=>{
 const tempData = [];
 for (const items in cart) {
@@ -82,7 +81,7 @@ return (
         <p>{calculateSubtotal(cartItems)+delivery_fee}.00</p>
       </div>
       <div className="flex justify-end">
-      <button className="border bg-black text-white py-3 px-8 my-5">Proceed to Checkout</button>
+      <Link to={'/place-order'} className="border bg-black text-white py-3 px-8 my-5">Proceed to Checkout</Link>
       </div>
     </div>
   </div>
