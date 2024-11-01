@@ -62,14 +62,14 @@ const PlaceOrder = () => {
         <p>Total</p>
         <p>{total+delivery_fee}.00</p>
       </div>
-      <div>
-        <div onClick={()=> handleActiveMethod('stripe')} className='flex items-center gap-3 cursor-pointer'>
-          <span className='w-5 h-5 rounded-full border'></span>
+      <div className='flex gap-4'>
+        <div onClick={()=> handleActiveMethod('stripe')} className='flex border p-2 w-fit items-center gap-3 cursor-pointer'>
+        <span className={`w-5 h-5 rounded-full border ${active.name === 'stripe' ? 'bg-green-600' : ''}`}></span>
           <img src={assets.stripe_logo} alt="" />
         </div>
-        <div onClick={()=> handleActiveMethod('cash')} className='flex items-center gap-3 cursor-pointer'>
-          <span className='w-5 h-5 rounded-full border'></span>
-          
+        <div onClick={()=> handleActiveMethod('cash')} className='flex border text-gray-400 p-2 w-fit items-center gap-3 cursor-pointer'>
+        <span className={`w-5 h-5 rounded-full border ${active.name === 'cash' ? 'bg-green-600' : ''}`}></span>
+          <h4>CASH ON DELIVERY</h4>
         </div>
       </div>
       <div className="flex justify-end">
