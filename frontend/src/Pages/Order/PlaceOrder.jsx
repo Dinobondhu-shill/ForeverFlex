@@ -1,10 +1,26 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import Title from '../../Components/Title';
 import { Link } from 'react-router-dom';
 import { ProductContext } from '../../Context/ProductContext';
+import { assets } from '../../../public/assets/frontend_assets/assets';
 
 const PlaceOrder = () => {
   const {total, delivery_fee, currency} = useContext(ProductContext)
+  const [active, setActive] = useState([])
+  console.log(active)
+
+  const handleActiveMethod = (name)=>{
+    if(name ==='stripe'){
+      setActive({
+        name:'stripe',
+      })
+    }
+    else if(name==='cash'){
+      setActive({
+        name:'cash'
+      })
+    }
+  }
   return (
     <div className='flex flex-col md:flex-row gap-10 my-10 items-center'>
       {/* form data  */}
@@ -45,6 +61,16 @@ const PlaceOrder = () => {
       <div className="flex justify-between font-bold">
         <p>Total</p>
         <p>{total+delivery_fee}.00</p>
+      </div>
+      <div>
+        <div onClick={()=> handleActiveMethod('stripe')} className='flex items-center gap-3 cursor-pointer'>
+          <span className='w-5 h-5 rounded-full border'></span>
+          <img src={assets.stripe_logo} alt="" />
+        </div>
+        <div onClick={()=> handleActiveMethod('cash')} className='flex items-center gap-3 cursor-pointer'>
+          <span className='w-5 h-5 rounded-full border'></span>
+          
+        </div>
       </div>
       <div className="flex justify-end">
       <Link to={'/place-order'} className="border bg-black text-white py-3 px-8 my-5">Place Order</Link>
