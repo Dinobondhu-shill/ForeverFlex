@@ -9,6 +9,7 @@ import SignUp from "./Pages/Register/SignUp";
 import ProductDetails from "./Pages/Collection/ProductDetails";
 import Cart from "./Pages/Cart/Cart";
 import PlaceOrder from "./Pages/Order/PlaceOrder";
+import Myorder from "./Pages/Order/Myorder";
 
    export const router = createBrowserRouter([
       {
@@ -50,6 +51,10 @@ import PlaceOrder from "./Pages/Order/PlaceOrder";
           {
             path:'/place-order',
             element: <PlaceOrder />
+          },
+          {
+            path: '/my-orders',
+            element: <Myorder />
           }
         ]
       },
