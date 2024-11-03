@@ -53,7 +53,7 @@ const handleShowSearch =()=>{
         {
           dropdown && <ul className='flex flex-col gap-3 bg-slate-100 px-6 py-3 rounded-lg absolute top-6 -right-20 shadow-md'>
           <NavLink to={'/profile'}>Profile</NavLink>
-          <NavLink to={'/profile'}>Orders</NavLink>
+          <NavLink to={'/my-orders'}>Orders</NavLink>
           <button onClick={()=> logOut()}>Logout</button>
         </ul>
         }
