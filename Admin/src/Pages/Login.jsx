@@ -12,7 +12,6 @@ const Login = ({setToken}) => {
     const password = form.password.value
 
   const response = await axios.post(BackendUrl +"api/user/admin", {email, password})
-  console.log(response)
   setToken(response.data.token)
   localStorage.setItem("token",response.data.token )
    } catch (error) {

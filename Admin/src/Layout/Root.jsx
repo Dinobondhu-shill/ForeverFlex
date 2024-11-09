@@ -10,8 +10,7 @@ export const BackendUrl = import.meta.env.VITE_BACKEND_URL
 
 
 const Root = () => {
-const [token, setToken] = useState(localStorage.getItem("token"))
-console.log(token)
+const [token, setToken] = useState(localStorage.getItem("token")?localStorage.getItem("token"):"")
   return (
     !token ? <Login setToken={setToken}/> : <div>
     <Nav setToken={setToken}/>
