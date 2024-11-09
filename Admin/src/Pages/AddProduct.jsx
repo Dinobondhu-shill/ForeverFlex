@@ -1,9 +1,17 @@
-import React from 'react';
+import upload from '../assets/upload_area.png'
 
 const AddProduct = () => {
   return (
-    <div>
-      this is the adding product section for this admin section
+    <div className='py-4 md:py-8'>
+      <form>
+      <div>
+        <h3>Upload Image</h3>
+      
+      </div>
+
+
+
+      </form>
     </div>
   );
 };
