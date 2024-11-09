@@ -1,27 +1,57 @@
 import { useState } from 'react';
 import upload from '../assets/upload_area.png'
+import { BackendUrl } from '../Layout/Root';
+import axios from 'axios';
 
 const AddProduct = () => {
-  const [image1, setImage1] = useState(false)
-  const [image2, setImage2] = useState(false)
-  const [image3, setImage3] = useState(false)
-  const [image4, setImage4] = useState(false)
-  const [sizes, setSizes] = useState([])
+  const [image1, setImage1] = useState(null); // Initialize as null for images
+  const [image2, setImage2] = useState(null);
+  const [image3, setImage3] = useState(null);
+  const [image4, setImage4] = useState(null);
+  const [sizes, setSizes] = useState([]); // Ensure sizes are an array
+  const [bestSeller, setBestSeller] = useState(false); // Boolean value for bestSeller
+  const token = localStorage.getItem("token");
 
-
-  console.log(sizes)
-  const handleAddProduct = async (e) =>{
-    e.preventDefault()
-    const form = e.target
+  const handleAddProduct = async (e) => {
+    e.preventDefault();
+    const form = e.target;
     const name = form.name.value;
     const description = form.description.value;
-    const price = form.price.value;
+    const price = parseFloat(form.price.value); // Ensure price is a number
     const category = form.category.value;
     const subCategory = form.subCategory.value;
-    const bestSeller = form.bestSeller.value;
-    console.log({name, description, price, category, subCategory, bestSeller})
-    
-  }
+
+    // Preparing images for upload
+    const images = [image1, image2, image3, image4].filter(Boolean);
+
+    // Ensure all data fields are formatted correctly
+    const productData = {
+      name,
+      description,
+      price,
+      category,
+      subCategory,
+      sizes: JSON.stringify(sizes), // Ensure sizes are sent as JSON string
+      bestSeller: bestSeller.toString(), // Ensure boolean as string
+      images
+    };
+
+    try {
+      const response = await axios.post(
+        BackendUrl + "api/product/add",
+        productData,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      console.log(response.data);
+    } catch (error) {
+      console.error("Error adding product:", error.message);
+    }
+  };
 
 
   return (
@@ -38,7 +68,7 @@ const AddProduct = () => {
             <img src={!image2 ? upload : URL.createObjectURL(image2)} className='w-28 object-cover cursor-pointer h-36' />
             <input type="file" onChange={(e)=>setImage2(e.target.files[0])} id="image2" hidden/>
           </label>
-          <label htmlFor="image4">
+          <label htmlFor="image3">
             <img src={!image3 ? upload : URL.createObjectURL(image3)} className='w-28 object-cover cursor-pointer h-36' />
             <input type="file" onChange={(e)=>setImage3(e.target.files[0])} id="image3" hidden/>
           </label>
@@ -94,7 +124,7 @@ const AddProduct = () => {
       </div>
     </div>
     <div className='flex gap-2'>
-      <input type="checkbox" name="bestSeller" id="bestSeller" />
+    <input type="checkbox" onChange={()=> setBestSeller(prev => !prev)} checked={bestSeller} name="bestSeller" id="bestSeller" />
       <label htmlFor="bestSelller">Add to Bestseller</label>
     </div>
       <button type="submit" className='px-10 py-3 bg-black text-white w-fit'>ADD</button>
