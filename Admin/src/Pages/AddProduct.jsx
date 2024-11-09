@@ -6,8 +6,10 @@ const AddProduct = () => {
   const [image2, setImage2] = useState(false)
   const [image3, setImage3] = useState(false)
   const [image4, setImage4] = useState(false)
+  const [sizes, setSizes] = useState([])
 
-  console.log([image1, image3, image2, image4])
+
+  console.log(sizes)
   const handleAddProduct = async (e) =>{
     e.preventDefault()
     const form = e.target
@@ -84,11 +86,11 @@ const AddProduct = () => {
     <div>
       <p>Product Sizes</p>
       <div className='flex gap-3 py-2'>
-        <p className='px-3 py-1 cursor-pointer bg-gray-400 text-white w-fit'>S</p>
-        <p className='px-3 py-1 cursor-pointer bg-gray-400 text-white w-fit'>M</p>
-        <p className='px-3 py-1 cursor-pointer bg-gray-400 text-white w-fit'>L</p>
-        <p className='px-3 py-1 cursor-pointer bg-gray-400 text-white w-fit'>XL</p>
-        <p className='px-3 py-1 cursor-pointer bg-gray-400 text-white w-fit'>XXL</p>
+        <p onClick={()=> setSizes(prev => prev.includes("S") ? prev.filter(item => item !== "S"): [...prev, "S"])} className={`px-3 py-1 cursor-pointer bg-gray-400 text-white w-fit ${sizes.includes("S")? "bg-pink-200 text-black" : ""}`}>S</p>
+        <p onClick={()=> setSizes(prev => prev.includes("M") ? prev.filter(item => item !== "M"): [...prev, "M"])} className={`px-3 py-1 cursor-pointer bg-gray-400 text-white w-fit ${sizes.includes("M")? "bg-pink-200 text-black" : ""}`}>M</p>
+        <p onClick={()=> setSizes(prev => prev.includes("L") ? prev.filter(item => item !== "L"): [...prev, "L"])} className={`px-3 py-1 cursor-pointer bg-gray-400 text-white w-fit ${sizes.includes("L")? "bg-pink-200 text-black" : ""}`}>L</p>
+        <p onClick={()=> setSizes(prev => prev.includes("XL") ? prev.filter(item => item !== "XL"): [...prev, "XL"])} className={`px-3 py-1 cursor-pointer bg-gray-400 text-white w-fit ${sizes.includes("XL")? "bg-pink-200 text-black" : ""}`}>XL</p>
+        <p onClick={()=> setSizes(prev => prev.includes("XXL") ? prev.filter(item => item !== "XXL"): [...prev, "XXL"])} className={`px-3 py-1 cursor-pointer bg-gray-400 text-white w-fit ${sizes.includes("XXL")? "bg-pink-200 text-black" : ""}`}>XXL</p>
       </div>
     </div>
     <div className='flex gap-2'>
