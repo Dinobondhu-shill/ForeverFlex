@@ -2,6 +2,9 @@ import { useState } from 'react';
 import upload from '../assets/upload_area.png'
 import { BackendUrl } from '../Layout/Root';
 import axios from 'axios';
+import {toast } from 'react-toastify';
+import { useNavigate } from 'react-router-dom';
+
 
 const AddProduct = () => {
   const [image1, setImage1] = useState(null); // Initialize as null for images
@@ -11,6 +14,7 @@ const AddProduct = () => {
   const [sizes, setSizes] = useState([]); // Ensure sizes are an array
   const [bestSeller, setBestSeller] = useState(false); // Boolean value for bestSeller
   const token = localStorage.getItem("token");
+  const navigate = useNavigate()
 
   const handleAddProduct = async (e) => {
     e.preventDefault();
@@ -21,33 +25,38 @@ const AddProduct = () => {
     const category = form.category.value;
     const subCategory = form.subCategory.value;
 
-    // Preparing images for upload
-    const images = [image1, image2, image3, image4].filter(Boolean);
-
-    // Ensure all data fields are formatted correctly
-    const productData = {
-      name,
-      description,
-      price,
-      category,
-      subCategory,
-      sizes: JSON.stringify(sizes), // Ensure sizes are sent as JSON string
-      bestSeller: bestSeller.toString(), // Ensure boolean as string
-      images
-    };
+    const formData = new FormData(); // Using FormData for file uploads
+    formData.append("name", name);
+    formData.append("description", description);
+    formData.append("price", price);
+    formData.append("category", category);
+    formData.append("subCategory", subCategory);
+    formData.append("bestSeller", bestSeller.toString());
+  
+    // Append sizes as a JSON string
+    formData.append("sizes", JSON.stringify(sizes));
+  
+    // Append images if they exist
+    if (image1) formData.append("image1", image1);
+    if (image2) formData.append("image2", image2);
+    if (image3) formData.append("image3", image3);
+    if (image4) formData.append("image4", image4);
 
     try {
       const response = await axios.post(
         BackendUrl + "api/product/add",
-        productData,
+        formData,
         {
           headers: {
             Authorization: `Bearer ${token}`,
-            "Content-Type": "application/json",
+            "Content-Type": "multipart/form-data",
           },
         }
       );
-      console.log(response.data);
+      if(response.data.success){
+        navigate('/all-products')
+        toast.success("Product Added Successfully")
+      }
     } catch (error) {
       console.error("Error adding product:", error.message);
     }
@@ -56,6 +65,7 @@ const AddProduct = () => {
 
   return (
     <div className='py-4 md:py-8 text-gray-500'>
+      
       <form onSubmit={handleAddProduct} className='flex flex-col gap-4'>
       <div>
         <h3 className='text-gray-500'>Upload Image</h3>
