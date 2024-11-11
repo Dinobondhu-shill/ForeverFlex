@@ -20,7 +20,7 @@ useEffect(()=>{
   return (
     <div className='mt-10 w-full '>
       <h2 className='text-gray-500'>All Product List</h2>
-      <div className="hidden md:flex">
+      <div className="hidden md:flex border border-gray-300 bg-gray-100 p-1">
   <div className="flex-1 flex items-center">
     <b>Image</b>
   </div>
