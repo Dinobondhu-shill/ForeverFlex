@@ -5,6 +5,7 @@ import { toast } from "react-toastify";
 export const ProductContext = createContext();
 const currency ="$";
 const delivery_fee = 10;
+const backendUrl = import.meta.env.VITE_BACKEND_URL
 
 
 const ProductProvider = ({children})=>{
@@ -74,7 +75,7 @@ setShowSearch,
 showSearch,
 handleAddToCart,
 cartCount,
-cart, updateQuantity, calculateSubtotal, total
+cart, updateQuantity, calculateSubtotal, total, backendUrl
   }
   return (
     <ProductContext.Provider value={values}>

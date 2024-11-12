@@ -2,16 +2,20 @@ import { Link, NavLink } from 'react-router-dom';
 import { assets } from '../../public/assets/frontend_assets/assets'
 import { useContext, useState } from 'react';
 import { ProductContext } from '../Context/ProductContext';
-import { AuthContext } from '../Context/FirebaseProvider';
+// import { AuthContext } from '../Context/FirebaseProvider';
 
 
 const Nav = () => {
   const [visible, setVisible] = useState(false);
   const [dropdown, setDropdown] = useState(false);
  const {showSearch, setShowSearch, cartCount} = useContext(ProductContext);
- const {user, logOut} = useContext(AuthContext);
+  const user = localStorage.getItem("token")
 const totalCount = cartCount();
 
+
+const handleLogout = ()=>{
+  localStorage.removeItem("token")
+}
 const handleShowSearch =()=>{
   setShowSearch(!showSearch)
 }
@@ -54,7 +58,7 @@ const handleShowSearch =()=>{
           dropdown && <ul className='flex flex-col gap-3 bg-slate-100 px-6 py-3 rounded-lg absolute top-6 -right-20 shadow-md'>
           <NavLink to={'/profile'}>Profile</NavLink>
           <NavLink to={'/my-orders'}>Orders</NavLink>
-          <button onClick={()=> logOut()}>Logout</button>
+          <button onClick={()=> handleLogout()}>Logout</button>
         </ul>
         }
         </div>

@@ -1,22 +1,33 @@
 import React, { useContext } from 'react';
 import Title from '../../Components/Title';
 import { Link, useNavigate } from 'react-router-dom';
-import { AuthContext } from '../../Context/FirebaseProvider';
+import axios from 'axios'
+import { ProductContext } from '../../Context/ProductContext';
+import { toast } from 'react-toastify';
 
 const SignUp = () => {
-  const {createUser, updateUserProfile} = useContext(AuthContext);
-  const navigate = useNavigate()
+  const navigate = useNavigate();
+  const {backendUrl} = useContext(ProductContext)
 
   const handleSignUp =async(e) =>{
     e.preventDefault();
-    const form = e.target
-    const fullName = form.name.value;
+    try {
+      const form = e.target
+    const name = form.name.value;
     const email = form.email.value;
-    const number = form.phone.value;
+    const phone = form.phone.value;
     const password = form.password.value;
-    await createUser(email, password)
-  await updateUserProfile(fullName, number)
+    const response = await axios.post(backendUrl + "api/user/register", {name, email, phone, password, })
+    if(response.data.success){
+      toast.success(response.data.message)
+    }
+    else{
+      toast.error(response.data.message)
+    }
   navigate('/')
+    } catch (error) {
+      console.log(error.message)
+    }
   }
 
   return (
