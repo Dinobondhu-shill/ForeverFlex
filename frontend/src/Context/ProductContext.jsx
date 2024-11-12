@@ -1,17 +1,19 @@
-import { createContext, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 import { products } from "../../public/assets/frontend_assets/assets";
 import { toast } from "react-toastify";
 
 export const ProductContext = createContext();
 const currency ="$";
 const delivery_fee = 10;
-const backendUrl = import.meta.env.VITE_BACKEND_URL
+const backendUrl = import.meta.env.VITE_BACKEND_URL;
+
 
 
 const ProductProvider = ({children})=>{
   const [cart, setCart] = useState({});  
   const [showSearch, setShowSearch] = useState(false);
   const [total, setTotal] = useState(null)
+  const [token, setToken] = useState('')
 
   const handleAddToCart = async (productId, size) =>{
     if(!size){
@@ -67,6 +69,12 @@ const ProductProvider = ({children})=>{
  return subtotal
   };
 
+  useEffect(()=>{
+    if(!token && localStorage.getItem("token")){
+      setToken(localStorage.getItem('token'))
+    }
+  },[])
+
   const values={
 products, 
 currency,
@@ -75,7 +83,7 @@ setShowSearch,
 showSearch,
 handleAddToCart,
 cartCount,
-cart, updateQuantity, calculateSubtotal, total, backendUrl
+cart, updateQuantity, calculateSubtotal, total, backendUrl, token, setToken
   }
   return (
     <ProductContext.Provider value={values}>

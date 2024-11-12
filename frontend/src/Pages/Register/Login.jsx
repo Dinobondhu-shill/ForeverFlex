@@ -1,14 +1,15 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import Title from '../../Components/Title';
 import { Link, useNavigate } from 'react-router-dom';
 import { ProductContext } from '../../Context/ProductContext';
-import { toast } from 'react-toastify';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import axios from 'axios'
 
 const Login = () => {
 
 const navigate = useNavigate()
-const {backendUrl} = useContext(ProductContext)
+const {backendUrl, setToken, token} = useContext(ProductContext)
 
 const handleLogin = async(e) =>{
   e.preventDefault()
@@ -19,6 +20,8 @@ try {
   const response = await axios.post(backendUrl +"api/user/login", {email, password})
   if(response.data.success){
     toast.success(response.data.message)
+    setToken(response.data.token)
+    localStorage.setItem("token", response.data.token)
     navigate('/')
   }
 else{
@@ -29,9 +32,16 @@ else{
   toast.error(error.message)
 }
 }
+useEffect(()=>{
+  if(token){
+navigate('/')
+  }
+},[token])
+
   return (
     <div className='flex flex-col gap-10 justify-center items-center mt-10 md:mt-32 font-prata'>
       <Title text1={""} text2={"Login"} />
+      <ToastContainer />
       <form onSubmit={handleLogin}>
         <div className='flex flex-col gap-5'>
           <input type="email" name='email' required placeholder='Email' className='outline-none border p-2 border-black min-w-96'/>

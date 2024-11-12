@@ -8,13 +8,13 @@ import { ProductContext } from '../Context/ProductContext';
 const Nav = () => {
   const [visible, setVisible] = useState(false);
   const [dropdown, setDropdown] = useState(false);
- const {showSearch, setShowSearch, cartCount} = useContext(ProductContext);
-  const user = localStorage.getItem("token")
+ const {showSearch, setShowSearch, cartCount, token, setToken,} = useContext(ProductContext);
 const totalCount = cartCount();
 
 
 const handleLogout = ()=>{
   localStorage.removeItem("token")
+  setToken('')
 }
 const handleShowSearch =()=>{
   setShowSearch(!showSearch)
@@ -51,7 +51,7 @@ const handleShowSearch =()=>{
         <img src={assets.search_icon} alt="" />
       </div >
       {
-        user ? <div onClick={()=> setDropdown(!dropdown)} className='w-[1.25rem] cursor-pointer '>
+        token ? <div onClick={()=> setDropdown(!dropdown)} className='w-[1.25rem] cursor-pointer '>
         <div  className='relative'>
         <img src={assets.profile_icon} alt="" />
         {
