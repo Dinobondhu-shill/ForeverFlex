@@ -15,7 +15,10 @@ const ProductProvider = ({children})=>{
   const [showSearch, setShowSearch] = useState(false);
   const [total, setTotal] = useState(null)
   const [token, setToken] = useState('')
-  const [products, setProducts] = useState([])
+  const [products, setProducts] = useState([]);
+  
+
+  // get all the product data from server
   const handleGetProducts =async ()=>{
   const res = await axios.get(backendUrl + "api/product/list")
   setProducts(res.data.products)
@@ -25,6 +28,9 @@ const ProductProvider = ({children})=>{
     handleGetProducts()
   },[])
 
+
+
+  // this is the adding cart item to database
   const handleAddToCart = async (productId, size) =>{
     if(!size){
       toast.error("Please Select Product Size")
@@ -107,6 +113,8 @@ const ProductProvider = ({children})=>{
     }
   }
   }
+
+
   const calculateSubtotal = (cartItems) => {
     let subtotal = 0;
   
@@ -121,11 +129,35 @@ const ProductProvider = ({children})=>{
  return subtotal
   };
 
-  useEffect(()=>{
-    if(!token && localStorage.getItem("token")){
-      setToken(localStorage.getItem('token'))
+
+// getting users cart data from database by using token
+const getCartData = async (token)=>{
+try {
+  const res = await axios.get(
+    backendUrl +"api/cart/cart-data", 
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
     }
-  },[token])
+  );
+  if(res.data.success){
+    setCart(res.data.cartData)
+  }
+} catch (error) {
+  console.log(error.message)
+  toast.error(error.message)
+}
+}
+
+useEffect(() => {
+  if (!token && localStorage.getItem("token")) {
+    const storedToken = localStorage.getItem("token");
+    setToken(storedToken);
+    getCartData(storedToken);
+  }
+}, [token]);
 
   const values={
 products, 
