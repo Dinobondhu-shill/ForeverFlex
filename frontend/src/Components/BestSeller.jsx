@@ -6,10 +6,10 @@ import ProductItem from './ProductItem';
 const BestSeller = () => {
   const {products} = useContext(ProductContext)
   const [bestSeller, setBestSeller] = useState([]);
-  
+  console.log(bestSeller, products)
   useEffect(()=>{
-const bestproduct = products.filter((item)=>item.bestseller)
-setBestSeller(bestproduct.slice(0,5))
+const bestProduct = products.filter((item)=>item.bestSeller)
+setBestSeller(bestProduct.slice(0,5))
   },[products]);
   return (
     <div className='py-4 md:py-8'>

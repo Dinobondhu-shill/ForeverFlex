@@ -6,7 +6,7 @@ import Title from "../../Components/Title";
 const Myorder = () => {
   const {products, currency} = useContext(ProductContext)
   return (
-    <div className="flex flex-col gap-4 items-start">
+    <div className="flex flex-col gap-4 items-start mt-16 mb-4">
       <Title text1={'MY'} text2={"ORDERS"} />
       {
         products.slice(0,4).map((item, index) =>{

@@ -42,7 +42,7 @@ return (
     return (
     <div key={index} className="border-y py-3 my-5  flex justify-between items-center">
       <div className="flex items-center gap-6">
-        <img className="w-16 md:w-20" src={productData.image[0]} alt="" />
+        <img className="w-16 md:w-20" src={productData.imagesUrl[0]} alt="" />
         <div>
           <h2 className="text-xl font-medium">{productData?.name}</h2>
           <div className="flex gap-3 items-center">

@@ -1,23 +1,47 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import Title from '../../Components/Title';
 import { Link, useNavigate } from 'react-router-dom';
-import { AuthContext } from '../../Context/FirebaseProvider';
+import { ProductContext } from '../../Context/ProductContext';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import axios from 'axios'
 
 const Login = () => {
-const {login} = useContext(AuthContext)
+
 const navigate = useNavigate()
+const {backendUrl, setToken, token} = useContext(ProductContext)
 
 const handleLogin = async(e) =>{
   e.preventDefault()
+try {
   const form = e.target;
   const email = form.email.value;
   const password = form.password.value;
-  await login(email, password)
-navigate('/')
+  const response = await axios.post(backendUrl +"api/user/login", {email, password})
+  if(response.data.success){
+    toast.success(response.data.message)
+    setToken(response.data.token)
+    localStorage.setItem("token", response.data.token)
+    navigate('/')
+  }
+else{
+  toast.error(response.data.message)
 }
+} catch (error) {
+  console.log(error)
+  toast.error(error.message)
+}
+}
+useEffect(()=>{
+  if(token){
+navigate('/')
+  }
+},[token])
+
   return (
     <div className='flex flex-col gap-10 justify-center items-center mt-10 md:mt-32 font-prata'>
       <Title text1={""} text2={"Login"} />
+      <ToastContainer />
       <form onSubmit={handleLogin}>
         <div className='flex flex-col gap-5'>
           <input type="email" name='email' required placeholder='Email' className='outline-none border p-2 border-black min-w-96'/>
