@@ -1,4 +1,4 @@
-import { Link, NavLink } from 'react-router-dom';
+import { Link, NavLink, useNavigate } from 'react-router-dom';
 import { assets } from '../../public/assets/frontend_assets/assets'
 import { useContext, useState } from 'react';
 import { ProductContext } from '../Context/ProductContext';
@@ -8,13 +8,16 @@ import { ProductContext } from '../Context/ProductContext';
 const Nav = () => {
   const [visible, setVisible] = useState(false);
   const [dropdown, setDropdown] = useState(false);
- const {showSearch, setShowSearch, cartCount, token, setToken,} = useContext(ProductContext);
+ const {showSearch, setShowSearch, cartCount, token, setToken,setCart} = useContext(ProductContext);
 const totalCount = cartCount();
+const navigate = useNavigate()
 
 
 const handleLogout = ()=>{
   localStorage.removeItem("token")
   setToken('')
+  setCart({});
+  navigate('/login')
 }
 const handleShowSearch =()=>{
   setShowSearch(!showSearch)

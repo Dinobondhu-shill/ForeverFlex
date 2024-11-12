@@ -1,6 +1,7 @@
 import { createContext, useEffect, useState } from "react";
-import { products } from "../../public/assets/frontend_assets/assets";
+// import { products } from "../../public/assets/frontend_assets/assets";
 import { toast } from "react-toastify";
+import axios from 'axios'
 
 export const ProductContext = createContext();
 const currency ="$";
@@ -14,6 +15,16 @@ const ProductProvider = ({children})=>{
   const [showSearch, setShowSearch] = useState(false);
   const [total, setTotal] = useState(null)
   const [token, setToken] = useState('')
+  const [products, setProducts] = useState([])
+console.log(products)
+const handleGetProducts =async ()=>{
+  const res = await axios.get(backendUrl + "api/product/list")
+  setProducts(res.data.products)
+}
+
+  useEffect(()=>{
+    handleGetProducts()
+  },[])
 
   const handleAddToCart = async (productId, size) =>{
     if(!size){
@@ -73,7 +84,7 @@ const ProductProvider = ({children})=>{
     if(!token && localStorage.getItem("token")){
       setToken(localStorage.getItem('token'))
     }
-  },[])
+  },[token])
 
   const values={
 products, 
@@ -83,7 +94,7 @@ setShowSearch,
 showSearch,
 handleAddToCart,
 cartCount,
-cart, updateQuantity, calculateSubtotal, total, backendUrl, token, setToken
+cart, updateQuantity, calculateSubtotal, total, backendUrl, token, setToken, setCart
   }
   return (
     <ProductContext.Provider value={values}>
