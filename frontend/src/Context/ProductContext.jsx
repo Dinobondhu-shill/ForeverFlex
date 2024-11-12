@@ -1,16 +1,29 @@
-import { createContext, useState } from "react";
-import { products } from "../../public/assets/frontend_assets/assets";
+import { createContext, useEffect, useState } from "react";
+// import { products } from "../../public/assets/frontend_assets/assets";
 import { toast } from "react-toastify";
+import axios from 'axios'
 
 export const ProductContext = createContext();
 const currency ="$";
 const delivery_fee = 10;
+const backendUrl = import.meta.env.VITE_BACKEND_URL;
+
 
 
 const ProductProvider = ({children})=>{
   const [cart, setCart] = useState({});  
   const [showSearch, setShowSearch] = useState(false);
   const [total, setTotal] = useState(null)
+  const [token, setToken] = useState('')
+  const [products, setProducts] = useState([])
+  const handleGetProducts =async ()=>{
+  const res = await axios.get(backendUrl + "api/product/list")
+  setProducts(res.data.products)
+}
+
+  useEffect(()=>{
+    handleGetProducts()
+  },[])
 
   const handleAddToCart = async (productId, size) =>{
     if(!size){
@@ -31,6 +44,27 @@ const ProductProvider = ({children})=>{
       cartProduct[productId][size] = 1
   }
   setCart(cartProduct)
+  if(token){
+  try {
+      const res = await axios.post(
+        `${backendUrl}api/cart/add-cart`, 
+        { itemId:productId, size }, 
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          },
+        }
+      );
+    if(res.data.success){
+      toast.success(res.data.message)
+    }
+    
+  } catch (error) {
+    console.log(error)
+    toast.error(error.message)
+  }
+}
   }
 
   const cartCount = () => {
@@ -47,10 +81,31 @@ const ProductProvider = ({children})=>{
     return totalCount;
   };
   
-  const updateQuantity = (itemId, size, quantity)=>{
+  const updateQuantity = async (itemId, size, quantity)=>{
     let CartData = structuredClone(cart);
     CartData[itemId][size] = quantity;
     setCart(CartData)
+    if(token){
+    try {
+        const res = await axios.post(
+          `${backendUrl}api/cart/update-cart`, 
+          { itemId, size, quantity }, 
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+              "Content-Type": "application/json",
+            },
+          }
+        );
+      if(res.data.success){
+        toast.success(res.data.message)
+      }
+      
+    } catch (error) {
+      console.log(error.message)
+      toast.error(error.message)
+    }
+  }
   }
   const calculateSubtotal = (cartItems) => {
     let subtotal = 0;
@@ -66,6 +121,12 @@ const ProductProvider = ({children})=>{
  return subtotal
   };
 
+  useEffect(()=>{
+    if(!token && localStorage.getItem("token")){
+      setToken(localStorage.getItem('token'))
+    }
+  },[token])
+
   const values={
 products, 
 currency,
@@ -74,7 +135,7 @@ setShowSearch,
 showSearch,
 handleAddToCart,
 cartCount,
-cart, updateQuantity, calculateSubtotal, total
+cart, updateQuantity, calculateSubtotal, total, backendUrl, token, setToken, setCart
   }
   return (
     <ProductContext.Provider value={values}>
