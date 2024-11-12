@@ -52,7 +52,7 @@ const Cart = () => {
               key={index}
               className="border-y py-3 my-5  flex justify-between items-center"
             >
-              <div className="flex items-center gap-6">
+              <div className="flex items-center gap-6 w-1/2">
                 <img
                   className="w-16 md:w-20"
                   src={productData?.imagesUrl[0]}
@@ -70,6 +70,7 @@ const Cart = () => {
                   </div>
                 </div>
               </div>
+              <div className="">
               <input
                 onChange={(e) => {
                   const value = Math.max(1, Number(e.target.value));
@@ -80,6 +81,7 @@ const Cart = () => {
                 defaultValue={item.quantity}
                 min="1"
               />
+              </div>
               <img
                 onClick={() => updateQuantity(item._id, item.size, 0)}
                 className="w-7 h-7 object-cover mr-10 cursor-pointer"

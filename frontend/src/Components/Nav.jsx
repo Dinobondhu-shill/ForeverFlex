@@ -2,6 +2,7 @@ import { Link, NavLink, useNavigate } from 'react-router-dom';
 import { assets } from '../../public/assets/frontend_assets/assets'
 import { useContext, useState } from 'react';
 import { ProductContext } from '../Context/ProductContext';
+import SearchBar from './SearchBar';
 // import { AuthContext } from '../Context/FirebaseProvider';
 
 
@@ -18,9 +19,6 @@ const handleLogout = ()=>{
   setToken('')
   setCart({});
   navigate('/login')
-}
-const handleShowSearch =()=>{
-  setShowSearch(!showSearch)
 }
 
   return (
@@ -43,16 +41,10 @@ const handleShowSearch =()=>{
       <p>CONTACTS</p>
       <hr className='w-2/4 border-none h-[1.5px] bg-gray-700 hidden'/>
       </NavLink>
-      <NavLink to={'/login'} className='flex flex-col items-center justify-center  gap-1'>
-      <p>Login</p>
-      <hr className='w-2/4 border-none h-[1.5px] bg-gray-700 hidden'/>
-      </NavLink>
      </div>
      {/* last group */}
      <div className='flex gap-6 items-center'>
-      <div onClick={handleShowSearch} className='w-[1.25rem] cursor-pointer'>
-        <img src={assets.search_icon} alt="" />
-      </div >
+      <SearchBar />
       {
         token ? <div onClick={()=> setDropdown(!dropdown)} className='w-[1.25rem] cursor-pointer '>
         <div  className='relative'>
