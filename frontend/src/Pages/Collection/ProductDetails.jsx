@@ -3,6 +3,8 @@ import { useParams } from 'react-router-dom';
 import { ProductContext } from '../../Context/ProductContext';
 import Title from '../../Components/Title';
 import RelatedProducts from './RelatedProducts';
+import { FaStar, FaStarHalf } from "react-icons/fa";
+
 
 const ProductDetails = () => {
 const {productId} = useParams();
@@ -45,6 +47,14 @@ useEffect(()=>{
       </div>
       <div className='w-full md:w-1/2'>
           <h2 className='text-2xl font-medium'>{product?.name}</h2>
+          <div className='flex text-yellow-400 gap-1 items-center my-3'>
+            <FaStar />
+            <FaStar />
+            <FaStar />
+            <FaStar />
+            <FaStarHalf />
+            (69)
+          </div>
           <p className='text-2xl font-medium my-8'>{currency}{product?.price}</p>
           <p className='w-3/4 text-gray-500 mb-10'>{product?.description}</p>
           <div>
@@ -67,7 +77,7 @@ useEffect(()=>{
     </div>
     {/* Tabs data */}
     <div role="tablist" className="tabs tabs-lifted my-10">
-  <input type="radio" name="my_tabs_2" role="tab" className="tab outline-none" aria-label="Descriptions" />
+  <input type="radio" defaultChecked name="my_tabs_2" role="tab" className="tab outline-none" aria-label="Descriptions" />
   <div role="tabpanel" className="tab-content text-[14px] border-base-300 text-gray-500 rounded-box p-6">
   An e-commerce website is an online platform that facilitates the buying and selling of products or services over the internet. It serves as a virtual marketplace where businesses and individuals can showcase their products, interact with customers, and conduct transactions without the need for a physical presence. E-commerce websites have gained immense popularity due to their convenience, accessibility, and the global reach they offer. <br />
   <br />
@@ -81,7 +91,7 @@ E-commerce websites typically display products or services along with detailed d
     role="tab"
     className="tab"
     aria-label="Reviews"
-    defaultChecked />
+     />
   <div role="tabpanel" className="tab-content bg-base-100 border-base-300 rounded-box p-6">
     Reviews goes here..............
   </div>

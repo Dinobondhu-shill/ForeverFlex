@@ -3,7 +3,7 @@ import { assets } from '../../public/assets/frontend_assets/assets'
 import { useContext, useState } from 'react';
 import { ProductContext } from '../Context/ProductContext';
 import SearchBar from './SearchBar';
-// import { AuthContext } from '../Context/FirebaseProvider';
+import { AiOutlineLogin } from "react-icons/ai";
 
 
 const Nav = () => {
@@ -23,7 +23,7 @@ const handleLogout = ()=>{
 
   return (
     <div className='flex justify-between gap-1 items-center border-b pb-4'>
-     <img src={assets.logo} alt="logo" className='w-36' />
+     <Link to={'/'}><img src={assets.logo} alt="logo" className='w-36' /></Link>
      <div className='hidden md:flex gap-4'>
       <NavLink to={'/'} className='flex flex-col items-center justify-center gap-1 '>
       <p>HOME</p>
@@ -58,11 +58,11 @@ const handleLogout = ()=>{
         }
         </div>
         
-      </div> : <Link className='w-[1.25rem] cursor-pointer' to={'/login'}> <img src={assets.profile_icon} alt="" /></Link>
+      </div> : <Link className='text-2xl cursor-pointer' to={'/login'}> <AiOutlineLogin /></Link>
       }
       <Link to={'/cart'} className='w-[1.25rem] cursor-pointer relative'>
         <img src={assets.cart_icon} alt="" />
-        <span className='w-4 h-4 border rounded-full absolute -top-3 -right-2 flex justify-center items-center bg-black text-white text-sm'>{totalCount}</span>
+        <span className={`w-5 h-5 border rounded-full absolute -top-3 -right-2 flex justify-center items-center bg-pink-300 p-1 text-black text-sm ${totalCount == 0 ? "hidden" : ''}`}>{totalCount}</span>
       </Link>
      </div>
      <div onClick={()=> setVisible(true)} className='md:hidden w-[1.25rem]'>
