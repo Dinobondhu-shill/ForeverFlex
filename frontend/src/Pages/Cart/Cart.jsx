@@ -54,23 +54,23 @@ const Cart = () => {
               return (
                 <div
                   key={index}
-                  className="border-y py-3 my-5 flex justify-between items-center"
+                  className="border-y py-3 my-5 flex justify-between items-end md:items-center"
                 >
-                  <div className="flex items-center gap-6 w-1/2">
+                  <div className="flex flex-col md:flex-row md:items-center md:gap-6 md:w-1/2">
                     <img
-                      className="w-16 md:w-20"
+                      className="w-1/2 md:w-20"
                       src={productData?.imagesUrl[0]}
                       alt=""
                     />
                     <div>
-                      <h2 className="text-xl font-medium">
+                      <h2 className="text-md md:text-xl font-medium">
                         {productData?.name}
                       </h2>
                       <div className="flex gap-3 items-center">
                         <p>
                           {currency} {productData?.price}
                         </p>
-                        <p className="px-4 py-2 border-[1px] bg-gray-100 cursor-pointer w-fit">
+                        <p className=" p-1 md:px-4 md:py-2 border-[1px] bg-gray-100 cursor-pointer w-fit">
                           {item.size}
                         </p>
                       </div>
@@ -82,7 +82,7 @@ const Cart = () => {
                         const value = Math.max(1, Number(e.target.value));
                         updateQuantity(item._id, item.size, value);
                       }}
-                      className="outline-none border w-16 text-center py-2"
+                      className="outline-none border w-8 md:w-16 text-center md:py-2"
                       type="number"
                       defaultValue={item.quantity}
                       min="1"
@@ -90,7 +90,7 @@ const Cart = () => {
                   </div>
                   <img
                     onClick={() => updateQuantity(item._id, item.size, 0)}
-                    className="w-7 h-7 object-cover mr-10 cursor-pointer"
+                    className="w-7 h-7 object-cover mx-1 md:mr-10 cursor-pointer"
                     src={assets.bin_icon}
                     alt=""
                   />
@@ -99,7 +99,7 @@ const Cart = () => {
             })}
           </div>
           {/* checkout field */}
-          <div className="flex flex-col items-end text-start mb-28">
+          <div className="flex flex-col md:items-end text-start mb-28">
             <div className="mr-56 my-10 text-xl">
               <Title text1={"CART"} text2={"TOTAL"} />
             </div>

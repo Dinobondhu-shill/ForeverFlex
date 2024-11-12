@@ -32,7 +32,7 @@ useEffect(()=>{
     <div>
       <div className='flex flex-col md:flex-row gap-10 my-5 md:my-10 w-full'>
       <div className='flex flex-col-reverse md:flex-row gap-6 w-full md:w-1/2'>
-        <div className='flex flex-row md:flex-col gap-3 w-3/5 md:w-1/5'>
+        <div className='flex flex-row md:flex-col gap-3 md:w-1/5'>
           {
             product?.imagesUrl.map((item, index) => <div key={index}>
               <div onClick={()=> setPhoto(item)}>
@@ -41,13 +41,13 @@ useEffect(()=>{
             </div>)
           }
         </div>
-        <div className='h-full'>
+        <div className=' md:h-full'>
           <img src={photo}  className='object-cover'/>
         </div>
       </div>
       <div className='w-full md:w-1/2'>
           <h2 className='text-2xl font-medium'>{product?.name}</h2>
-          <div className='flex text-yellow-400 gap-1 items-center my-3'>
+          <div className='flex text-yellow-400 gap-1 items-center my-1 md:my-3'>
             <FaStar />
             <FaStar />
             <FaStar />
@@ -55,7 +55,7 @@ useEffect(()=>{
             <FaStarHalf />
             (69)
           </div>
-          <p className='text-2xl font-medium my-8'>{currency}{product?.price}</p>
+          <p className='text-2xl font-medium my-3 md:my-8'>{currency}{product?.price}</p>
           <p className='w-3/4 text-gray-500 mb-10'>{product?.description}</p>
           <div>
             <h3 className='text-[18px]'>Select Size</h3>
