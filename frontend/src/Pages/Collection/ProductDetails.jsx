@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import  { useContext, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { ProductContext } from '../../Context/ProductContext';
 import Title from '../../Components/Title';
@@ -20,19 +20,19 @@ const fatchedProductData = async()=>{
 }
 useEffect(()=>{
 fatchedProductData()
-},[products, productId]);
+},[product, productId, products]);
 
 useEffect(()=>{
-  setPhoto(product?.image[0])
+  setPhoto(product?.imagesUrl[0])
 },[product])
 
   return (
     <div>
       <div className='flex flex-col md:flex-row gap-10 my-5 md:my-10 w-full'>
       <div className='flex flex-col-reverse md:flex-row gap-6 w-full md:w-1/2'>
-        <div className='flex flex-row md:flex-col gap-3 md:w-1/5'>
+        <div className='flex flex-row md:flex-col gap-3 w-3/5 md:w-1/5'>
           {
-            product?.image.map((item, index) => <div key={index}>
+            product?.imagesUrl.map((item, index) => <div key={index}>
               <div onClick={()=> setPhoto(item)}>
               <img src={item} alt="" />
               </div>
