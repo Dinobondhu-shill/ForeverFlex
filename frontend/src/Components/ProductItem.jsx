@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 
 
 const ProductItem = ({item}) => {
-  const {currency,} = useContext(ProductContext)
+  const {currency} = useContext(ProductContext)
   const {name, price, _id, imagesUrl, description} = item
   
   return (
