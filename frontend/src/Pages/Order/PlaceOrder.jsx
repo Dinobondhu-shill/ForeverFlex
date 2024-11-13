@@ -2,10 +2,13 @@ import React, { useContext, useState } from 'react';
 import Title from '../../Components/Title';
 import { ProductContext } from '../../Context/ProductContext';
 import { assets } from '../../../public/assets/frontend_assets/assets';
-
+import axios from 'axios';
+import { toast } from 'react-toastify';
+import { useNavigate } from 'react-router-dom';
 const PlaceOrder = () => {
-  const { total, delivery_fee, currency } = useContext(ProductContext);
+  const { total, cart, delivery_fee, currency, token, backendUrl } = useContext(ProductContext);
   const [active, setActive] = useState('cash');
+  const navigate = useNavigate()
   const [formValues, setFormValues] = useState({
     firstName: '',
     lastName: '',
@@ -17,6 +20,34 @@ const PlaceOrder = () => {
     country: '',
     phone: ''
   });
+
+  const handlePlaceOrder =async () =>{
+    const amount = total+delivery_fee;
+    const address = formValues;
+    const items = cart;
+    if(active === 'cash'){
+      try {
+        const res = await axios.post(backendUrl + "api/order/place", {items, amount, address,}, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          },
+        })
+
+        console.log(res.data)
+        if(res.data.success){
+          toast.success(res.data.message)
+          navigate('/')
+        }
+        else{
+          toast.error(res.data.message)
+        }
+      } catch (error) {
+        console.log(error)
+        toast.error(error.message)
+      }
+    }
+  }
 
   const handleActiveMethod = (name) => {
     setActive(name);
@@ -95,9 +126,16 @@ const PlaceOrder = () => {
             </div>
           </div>
           <div className="flex justify-end">
-            <button data-tip='please fill the form first' type="submit" disabled={!isFormComplete} className={`border py-3 px-8 my-5 ${isFormComplete ? 'bg-black text-white' : 'bg-gray-400 text-gray-700 tooltip-bottom  cursor-not-allowed'}`}>
+          <button 
+              onClick={handlePlaceOrder}
+              data-tip={!isFormComplete ? 'Please fill in all required fields' : ''}
+              type="submit"
+              disabled={!isFormComplete}
+              className={`border py-3 px-8 my-5 ${isFormComplete ? 'bg-black text-white' : 'bg-gray-400 tooltip-bottom text-gray-700 cursor-not-allowed'}`}
+            >
               Place Order
             </button>
+            
           </div>
         </div>
       </div>
