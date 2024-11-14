@@ -47,39 +47,43 @@ const Myorder = () => {
     <div className="flex flex-col gap-4 items-start mt-16 mb-4">
       <Title text1={"MY"} text2={"ORDERS"} />
       <div className="flex flex-col gap-5 w-full">
-        {data.map((order, orderIndex) => (
-          <div key={orderIndex} className="py-3 px-4 border-t border-b">
-            <div className="flex gap-3 justify-between items-center">
-             <div className="flex gap-5">
-             <div className="w-20">
-                <img
-                  src={order.imagesUrl[0]}
-                  alt={order.name}
-                  className="w-full"
-                />
-              </div>
-              <div>
-                <h2>{order.name}</h2>
-                <div className="flex gap-2">
-                  <p>{currency}{order.price}</p>
-                  <p>Size: {order.size}</p>
-                  <p>Quantity: {order.quantity}</p>
+        {data.length === 0 ? (
+          <div className="text-gray-500 text-center text-3xl">No Order Data Yet</div>
+        ) : (
+          data.map((order, orderIndex) => (
+            <div key={orderIndex} className="py-3 px-4 border-t border-b">
+              <div className="flex gap-3 justify-between items-center">
+                <div className="flex w-2/5 gap-5">
+                  <div className="w-20">
+                    <img
+                      src={order.imagesUrl[0]}
+                      alt={order.name}
+                      className="w-full"
+                    />
+                  </div>
+                  <div>
+                    <h2>{order.name}</h2>
+                    <div className="flex gap-2">
+                      <p>{currency}{order.price}</p>
+                      <p>Size: {order.size}</p>
+                      <p>Quantity: {order.quantity}</p>
+                    </div>
+                    <p>
+                      Date: <span className="text-gray-500">{new Date(order.date).toLocaleDateString()}</span>
+                    </p>
+                    <p>
+                      Payment: <span className="text-gray-500">{order.paymentMethod}</span>
+                    </p>
+                  </div>
                 </div>
-                <p>
-                  Date: <span className="text-gray-500">{new Date(order.date).toLocaleDateString()}</span>
-                </p>
-                <p>
-                  Payment: <span className="text-gray-500">{order.paymentMethod}</span>
-                </p>
+                <div className="flex items-center gap-1">
+                  <span className="w-2 h-2 rounded-full bg-green-600"></span>{order.status}
                 </div>
-             </div>
-                
-                <div className="flex items-center gap-1"><span className="w-2 h-2 rounded-full bg-green-600 "></span>{order.status}</div>
                 <div className="border px-3 py-2">TRACE ORDER</div>
               </div>
-            
-          </div>
-        ))}
+            </div>
+          ))
+        )}
       </div>
     </div>
   );
