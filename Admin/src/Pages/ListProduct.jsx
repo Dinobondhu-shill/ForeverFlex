@@ -27,10 +27,10 @@ useEffect(()=>{
   <div className="flex-[3] flex">
     <b>Name</b>
   </div>
-  <div className="flex-1 flex ">
+  <div className="flex-1 flex items-center ">
     <b>Price</b>
   </div>
-  <div className="flex-1 flex ">
+  <div className="flex-1 flex items-center ">
     <b>Category</b>
   </div>
   <div className="flex-1 flex items-center justify-center">
