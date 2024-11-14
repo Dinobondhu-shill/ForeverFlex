@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import  { useContext, useState } from 'react';
 import Title from '../../Components/Title';
 import { ProductContext } from '../../Context/ProductContext';
 import { assets } from '../../../public/assets/frontend_assets/assets';
@@ -52,10 +52,8 @@ const PlaceOrder = () => {
         });
   
         if (res.data.success) {
-          
           setCart([]); 
-  
-          navigate('/');
+          navigate('/my-orders');
           toast.success(res.data.message);
         } else {
           toast.error(res.data.message);
