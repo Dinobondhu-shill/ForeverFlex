@@ -13,6 +13,7 @@ const Verify = () => {
 
   const success = searchParams.get("success");
   const orderId = searchParams.get('orderId')
+  console.log(orderId)
 
 
   const verifyPayment = async () =>{
@@ -33,9 +34,11 @@ const Verify = () => {
     }
   }
 
-  useEffect(()=>{
-    verifyPayment()
-  },[token])
+  useEffect(() => {
+    if (orderId && token) {
+      verifyPayment();
+    }
+  }, [token, orderId]);
 
 
   return (

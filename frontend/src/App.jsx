@@ -11,11 +11,13 @@ import Cart from "./Pages/Cart/Cart";
 import PlaceOrder from "./Pages/Order/PlaceOrder";
 import Myorder from "./Pages/Order/Myorder";
 import Verify from "./Pages/verifyStripe/Verify";
+import Error from "./Pages/Error";
 
    export const router = createBrowserRouter([
       {
         path: "/",
         element: <Root />,
+        errorElement:<Error />,
         children: [
           {
             path:'/',
@@ -60,7 +62,8 @@ import Verify from "./Pages/verifyStripe/Verify";
           {
             path:'/verify',
             element:<Verify />
-          }
+          },
+          
         ]
       },
     ]);
