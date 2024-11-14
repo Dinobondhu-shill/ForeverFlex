@@ -6,7 +6,7 @@ import axios from 'axios';
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
 const PlaceOrder = () => {
-  const { total, cart, delivery_fee, currency, token, backendUrl } = useContext(ProductContext);
+  const { total, cart, delivery_fee, currency,setCart, token, backendUrl, products } = useContext(ProductContext);
   const [active, setActive] = useState('cash');
   const navigate = useNavigate()
   const [formValues, setFormValues] = useState({
@@ -20,34 +20,53 @@ const PlaceOrder = () => {
     country: '',
     phone: ''
   });
+  console.log(cart)
 
-  const handlePlaceOrder =async () =>{
-    const amount = total+delivery_fee;
+  const handlePlaceOrder = async () => {
+    const amount = total + delivery_fee;
     const address = formValues;
-    const items = cart;
-    if(active === 'cash'){
+    
+    let orderItems = [];
+    for (const productId in cart) {
+      for (const size in cart[productId]) { 
+        if (cart[productId][size] > 0) {
+          // Find the product by productId in products array
+          const itemInfo = structuredClone(products.find(product => product._id === productId));
+          
+          if (itemInfo) {
+            itemInfo.size = size;  // Set the size property
+            itemInfo.quantity = cart[productId][size];  // Set the quantity for that size
+            orderItems.push(itemInfo);
+          }
+        }
+      }
+    }
+    
+    if (active === 'cash') {
       try {
-        const res = await axios.post(backendUrl + "api/order/place", {items, amount, address,}, {
+        const res = await axios.post(backendUrl + "api/order/place", { items:orderItems, amount, address }, {
           headers: {
             Authorization: `Bearer ${token}`,
             "Content-Type": "application/json",
           },
-        })
-
-        console.log(res.data)
-        if(res.data.success){
-          toast.success(res.data.message)
-          navigate('/')
-        }
-        else{
-          toast.error(res.data.message)
+        });
+  
+        if (res.data.success) {
+          
+          setCart([]); 
+  
+          navigate('/');
+          toast.success(res.data.message);
+        } else {
+          toast.error(res.data.message);
         }
       } catch (error) {
-        console.log(error)
-        toast.error(error.message)
+        console.log(error);
+        toast.error(error.message);
       }
     }
-  }
+  };
+  
 
   const handleActiveMethod = (name) => {
     setActive(name);
@@ -60,7 +79,7 @@ const PlaceOrder = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(formValues); // Logs form values upon form submission
+   
   };
 
   // Check if all required fields are filled
