@@ -10,6 +10,7 @@ import ProductDetails from "./Pages/Collection/ProductDetails";
 import Cart from "./Pages/Cart/Cart";
 import PlaceOrder from "./Pages/Order/PlaceOrder";
 import Myorder from "./Pages/Order/Myorder";
+import Verify from "./Pages/verifyStripe/Verify";
 
    export const router = createBrowserRouter([
       {
@@ -55,6 +56,10 @@ import Myorder from "./Pages/Order/Myorder";
           {
             path: '/my-orders',
             element: <Myorder />
+          },
+          {
+            path:'/verify',
+            element:<Verify />
           }
         ]
       },

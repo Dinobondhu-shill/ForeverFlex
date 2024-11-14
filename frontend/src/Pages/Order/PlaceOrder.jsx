@@ -20,7 +20,6 @@ const PlaceOrder = () => {
     country: '',
     phone: ''
   });
-  console.log(cart)
 
   const handlePlaceOrder = async () => {
     const amount = total + delivery_fee;
@@ -55,6 +54,26 @@ const PlaceOrder = () => {
           setCart([]); 
           navigate('/my-orders');
           toast.success(res.data.message);
+        } else {
+          toast.error(res.data.message);
+        }
+      } catch (error) {
+        console.log(error);
+        toast.error(error.message);
+      }
+    }
+    else if(active ==='stripe'){
+      try {
+        const res = await axios.post(backendUrl + "api/order/placeWithStripe", { items:orderItems, amount, address }, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          },
+        });
+  
+        if (res.data.success) {
+          const {session_url} = res.data
+          window.location.replace(session_url)
         } else {
           toast.error(res.data.message);
         }

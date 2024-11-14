@@ -63,9 +63,9 @@ const Myorder = () => {
                   </div>
                   <div>
                     <h2>{order.name}</h2>
-                    <div className="flex gap-2">
+                    <div className="flex gap-2 flex-col">
                       <p>{currency}{order.price}</p>
-                      <p>Size: {order.size}</p>
+                      <p className="">Size: {order.size}</p>
                       <p>Quantity: {order.quantity}</p>
                     </div>
                     <p>
@@ -79,7 +79,7 @@ const Myorder = () => {
                 <div className="flex items-center gap-1">
                   <span className="w-2 h-2 rounded-full bg-green-600"></span>{order.status}
                 </div>
-                <div className="border px-3 py-2">TRACE ORDER</div>
+                <div className="border px-3 md:py-2">TRACE ORDER</div>
               </div>
             </div>
           ))
