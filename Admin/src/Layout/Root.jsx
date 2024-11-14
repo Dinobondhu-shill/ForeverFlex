@@ -17,7 +17,7 @@ const [token, setToken] = useState(localStorage.getItem("token")?localStorage.ge
     !token ? <Login setToken={setToken}/> : <div>
       <ToastContainer />
     <Nav setToken={setToken}/>
-    <div className='px-3 md:px-10 gap-16 flex'>
+    <div className='px-3 md:px-10 gap-5 md:gap-16 flex'>
       <SideNav />
       <Outlet />
     </div>

@@ -71,15 +71,15 @@ const AddProduct = () => {
         <h3 className='text-gray-500'>Upload Image</h3>
         <div className='flex gap-4 my-2'>
           <label htmlFor="image1">
-            <img src={!image1 ? upload : URL.createObjectURL(image1)} className='w-28 object-cover cursor-pointer h-36' />
+            <img src={!image1 ? upload : URL.createObjectURL(image1)} className='w-20 md:w-28 object-cover cursor-pointer h-36' />
             <input type="file" onChange={(e)=>setImage1(e.target.files[0])} id="image1" hidden/>
           </label>
           <label htmlFor="image2">
-            <img src={!image2 ? upload : URL.createObjectURL(image2)} className='w-28 object-cover cursor-pointer h-36' />
+            <img src={!image2 ? upload : URL.createObjectURL(image2)} className='w-20 md:w-28 object-cover cursor-pointer h-36' />
             <input type="file" onChange={(e)=>setImage2(e.target.files[0])} id="image2" hidden/>
           </label>
           <label htmlFor="image3">
-            <img src={!image3 ? upload : URL.createObjectURL(image3)} className='w-28 object-cover cursor-pointer h-36' />
+            <img src={!image3 ? upload : URL.createObjectURL(image3)} className='w-20 md:w-28 object-cover cursor-pointer h-36' />
             <input type="file" onChange={(e)=>setImage3(e.target.files[0])} id="image3" hidden/>
           </label>
           <label htmlFor="image4">
@@ -97,7 +97,7 @@ const AddProduct = () => {
       <label className='text-gray-500'>Product Description</label>
       <textarea type="text" className='border outline-[#975c5c] px-2 py-2 rounded-md' placeholder='Write Description Here' name='description' />
     </div>
-      <div className='flex gap-6'>
+      <div className='flex flex-col md:flex-row gap-6'>
         {/* Category */}
         <div className='flex flex-col gap-2 w-fit '> 
           <label htmlFor="">Product Category</label>
