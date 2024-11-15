@@ -85,10 +85,10 @@ const handleShowSearch =()=>{
         <img onClick={handleShowSearch} src={assets.cross_icon} className='cursor-pointer' />
       </div> : null}
       {/* others content  */}
-      <div className='my-5 md:my-10 md:flex gap-10'>
+      <div className='my-5 md:my-10 md:flex gap-5'>
      {/* Filter section */}
      
-     <div className='max-w-56 my-4'>
+     <div className='max-w-52 my-4'>
      <h3 onClick={handleShowFilter} className='text-2xl mb-10 pt-2 flex items-center gap-2'>FILTERS
       <img src={assets.dropdown_icon} className={`h-4 md:hidden ${showFilter? 'rotate-90': ''}`} />
      </h3>
@@ -144,11 +144,14 @@ const handleShowSearch =()=>{
         </div>
       </div>
       {/* Render all the product here */}
-      <div className='my-5 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4'>
+      <div className='my-5 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5'>
     {
       filterProducts?.map((item, index)=>(
-        <Link key={index} to={`/collection/${item._id}`}>
-        <ProductItem item={item}/></Link>
+        <Link  key={index} to={`/collection/${item._id}`}>
+        <div className='flex gap-2'>
+        <ProductItem item={item}/>
+        </div>
+        </Link>
       ))
     }
       </div>
