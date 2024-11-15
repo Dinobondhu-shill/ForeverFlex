@@ -41,6 +41,10 @@ const handleLogout = ()=>{
       <p>CONTACTS</p>
       <hr className='w-2/4 border-none h-[1.5px] bg-gray-700 hidden'/>
       </NavLink>
+      <Link to={'https://backoffice-forever.netlify.app'} className='flex flex-col border rounded-full p-2 hover:bg-gray-100 items-center justify-center  gap-1'>
+      <p>Admin Panel</p>
+      <hr className='w-2/4 border-none h-[1.5px] bg-gray-700 hidden'/>
+      </Link>
      </div>
      {/* last group */}
      <div className='flex gap-6 items-center'>
