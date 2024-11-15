@@ -1,5 +1,15 @@
 import React from 'react';
 import { assets } from '../../public/assets/frontend_assets/assets';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import image1 from '../../public/assets/dress (1).jpg'
+import image2 from '../../public/assets/dress (2).jpg'
+import image3 from '../../public/assets/dress (3).jpg'
+import image4 from '../../public/assets/dress (4).jpg'
+// Import Swiper styles
+import 'swiper/css';
+import { Autoplay, Pagination } from 'swiper/modules';
+
+
 
 const Banner = () => {
   return (
@@ -18,9 +28,38 @@ const Banner = () => {
       </div>
       
     </div>
-    <div className=' w-full md:w-1/2 '>
-        <img src={assets.hero_img} alt="Banner image" />
-      </div>
+    <div className='w-full md:w-1/2 h-[400px]'> {/* Add height */}
+  <Swiper
+    direction={'vertical'}
+    pagination={{
+      clickable: true,
+    }}
+    autoplay={{
+      delay: 3000, // Time in milliseconds between slides (adjust as needed)
+      disableOnInteraction: false, // Keeps autoplay running even after user interaction
+    }}
+    modules={[Pagination, Autoplay]}
+    className="mySwiper"
+    style={{ height: '100%' }} // Ensure it fills its container
+  >
+    <SwiperSlide>
+      <img className='h-full w-full object-cover' src={assets.hero_img} alt="Banner 1" />
+    </SwiperSlide>
+    <SwiperSlide>
+      <img className='h-full w-full object-cover' src={image2} alt="Banner 2" />
+    </SwiperSlide>
+    <SwiperSlide>
+      <img className='h-full w-full object-cover' src={image3} alt="Banner 3" />
+    </SwiperSlide>
+    <SwiperSlide>
+      <img className='h-full w-full object-cover' src={image4} alt="Banner 4" />
+    </SwiperSlide>
+    <SwiperSlide>
+      <img className='h-full w-full object-cover' src={image1} alt="Banner 1" />
+    </SwiperSlide>
+  </Swiper>
+</div>
+
     </div>
   );
 };

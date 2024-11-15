@@ -9,13 +9,13 @@ const ProductItem = ({item}) => {
   const {name, price, _id, imagesUrl, description} = item
   
   return (
-    <Link to={`/product/${_id}`} className='text-gray-700 cursor-pointer'>
+    <Link to={`/product/${_id}`} className='text-gray-700 cursor-pointer shadow-md border p-3'>
      <div className='overflow-hidden'>
-    <img className='hover:scale-110 transition ease-in-out ' src={imagesUrl[0]} alt="" />
+    <img className='hover:scale-110 transition ease-in-out rounded-sm ' src={imagesUrl[0]} alt="" />
      </div>
-     <div className='spacey-1'>
-      <h2 className='text-[18px] text-black pt-3'>{name}</h2>
-      <p>Price: {currency}{price}</p>
+     <div className='spacey-2'>
+      <h2 className='text-[15px] font-light font-prata text-gray-600 pt-3'>{name}</h2>
+      <p className='text-gray-500 rounded-xl mt-2 bg-gray-100 px-2 py-1 w-fit '>Price: {currency}{price}</p>
      </div>
     </Link>
   );

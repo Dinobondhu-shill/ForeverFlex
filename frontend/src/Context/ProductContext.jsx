@@ -18,12 +18,15 @@ const ProductProvider = ({children})=>{
   const [products, setProducts] = useState([]);
   
 
-  // get all the product data from server
-  const handleGetProducts =async ()=>{
-  const res = await axios.get(backendUrl + "api/product/list")
-  setProducts(res.data.products)
-}
-
+  const handleGetProducts = async () => {
+    try {
+      const res = await axios.get(`${backendUrl}api/product/list`);
+      setProducts(res.data.products);
+    } catch (error) {
+      console.error("Error fetching products:", error);
+    }
+  };
+  
   useEffect(()=>{
     handleGetProducts()
   },[])
